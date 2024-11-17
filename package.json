@@ -1,5 +1,5 @@
 {
-  "name": "engineers-admin",
+  "name": "my-project",
   "version": "0.1.0",
   "private": true,
   "description": "A Strapi application",
@@ -15,7 +15,6 @@
     "@strapi/plugin-users-permissions": "5.4.0",
     "@strapi/strapi": "5.4.0",
     "better-sqlite3": "11.3.0",
-    "npm-check-updates": "^17.1.11",
     "pg": "^8.13.1",
     "pg-connection-string": "^2.7.0",
     "react": "^18.0.0",
@@ -34,6 +33,6 @@
     "npm": ">=6.0.0"
   },
   "strapi": {
-    "uuid": "2a51a532-2faa-49ca-bf93-d2fdebbdebe1"
+    "uuid": "d4fa92b6-2079-4c1e-8b6e-613b61b4fa97"
   }
 }
