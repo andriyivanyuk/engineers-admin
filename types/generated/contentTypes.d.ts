@@ -457,6 +457,7 @@ export interface ApiHeroHero extends Struct.SingleTypeSchema {
 export interface ApiNavigationNavigation extends Struct.CollectionTypeSchema {
   collectionName: 'navigations';
   info: {
+    description: '';
     displayName: 'Navigation';
     pluralName: 'navigations';
     singularName: 'navigation';
@@ -470,6 +471,12 @@ export interface ApiNavigationNavigation extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    attributeTitle: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
