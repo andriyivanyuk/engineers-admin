@@ -1,10 +1,10 @@
 {
-  "kind": "collectionType",
-  "collectionName": "services",
+  "kind": "singleType",
+  "collectionName": "abouts",
   "info": {
-    "singularName": "service",
-    "pluralName": "services",
-    "displayName": "Services",
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "About",
     "description": ""
   },
   "options": {
@@ -16,7 +16,15 @@
     }
   },
   "attributes": {
-    "serviceName": {
+    "infoTitle": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "mainTitle": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -32,7 +40,7 @@
       },
       "type": "text"
     },
-    "iconUrl": {
+    "img": {
       "allowedTypes": [
         "images",
         "files",
@@ -40,7 +48,7 @@
         "audios"
       ],
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
