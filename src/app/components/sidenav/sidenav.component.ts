@@ -44,7 +44,7 @@ export class SidenavComponent {
 
   menuItems: MenuItem[] = [
     {
-      icon: 'fal fa-home',
+      icon: 'fal fa-home fa-2xl',
       label: 'Dashboard',
       isOpen: false,
       children: [

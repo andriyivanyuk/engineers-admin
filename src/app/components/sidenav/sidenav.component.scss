@@ -34,7 +34,7 @@
   .items-list {
     display: flex;
     flex-direction: column;
-    row-gap: 5px;
+    row-gap: 12px;
   }
 }
 
@@ -58,6 +58,10 @@
 
   &.menu-item-active {
     background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .main-icon {
+    font-size: 24px;
   }
 
   i {
@@ -93,7 +97,7 @@
 }
 
 .sidebar-collapsed {
-  width: 50px;
+  width: 60px;
 
   .sidebar-menu-item {
     position: static;

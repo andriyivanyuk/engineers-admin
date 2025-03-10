@@ -15,20 +15,17 @@
             }"
             (click)="toggleMenuItem(item)"
           >
-            <i [class]="item.icon"></i>
+            <i class="main-icon" [class]="item.icon"></i>
             <span class="sidebar-item-text">{{ item.label }}</span>
+            @if(item.children && !isSidebarCollapsed) {
             <i
-              *ngIf="item.children && !isSidebarCollapsed"
               class="fas fa-chevron-down sidebar-item-arrow"
               [ngClass]="{ rotated: item.isOpen }"
             ></i>
+            }
           </a>
-
-          <ul
-            *ngIf="item.children && !isSidebarCollapsed && item.isOpen"
-            class="sidebar-submenu"
-            [@submenuAnimation]
-          >
+          @if(item.children && !isSidebarCollapsed && item.isOpen) {
+          <ul class="sidebar-submenu" [@submenuAnimation]>
             <li *ngFor="let child of item.children">
               <a class="sidebar-item sidebar-subitem">
                 <i [class]="child.icon"></i>
@@ -36,6 +33,7 @@
               </a>
             </li>
           </ul>
+          }
         </li>
       </ng-container>
       }

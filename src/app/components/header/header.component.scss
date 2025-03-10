@@ -1,0 +1,26 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.navbar {
+  flex-grow: 1;
+  margin-left: 250px;
+  transition: all 0.3s ease-in-out;
+  background-color: #f4f6f7;
+  overflow-y: auto;
+
+  &-inner {
+    color: white;
+    background-color: #285059;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &-expanded {
+    margin-left: 60px;
+  }
+
+  mat-icon {
+    color: white;
+  }
+}
