@@ -23,9 +23,10 @@
 .sidebar-logo {
   color: #fff;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .sidebar-menu {
@@ -61,7 +62,7 @@
   }
 
   .main-icon {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   i {

@@ -2,12 +2,13 @@
   min-height: calc(100vh - 64px);
   flex-grow: 1;
   margin-left: 250px;
+  // padding-top: 64px;
   transition: all 0.3s ease-in-out;
-  background-color: #f4f6f7;
+  background-color: #f1f5f9;
   overflow-y: auto;
 
   &-inner {
-    padding: 2rem;
+    padding: 35px;
     max-width: 1200px;
     margin: 0 auto;
   }

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdminComponent } from './layouts/admin/admin.component';
+import { CreateProductComponent } from './pages/products/create-product/create-product.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,7 @@ export const routes: Routes = [
     // canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'create-product', component: CreateProductComponent },
       // { path: 'create-product', component: CreateProductComponent },
       // { path: 'create-category', component: AddCategoryComponent },
     ],

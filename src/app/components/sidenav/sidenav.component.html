@@ -1,6 +1,8 @@
 <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }">
   <div class="sidebar-header">
-    <a class="sidebar-logo">{{ isSidebarCollapsed ? "D" : "Digital" }}</a>
+    <a class="sidebar-logo">{{
+      isSidebarCollapsed ? "D" : "Digital Engineers"
+    }}</a>
   </div>
   <div class="sidebar-menu">
     <ul class="items-list">
@@ -14,6 +16,7 @@
               'menu-item-active': item.isOpen
             }"
             (click)="toggleMenuItem(item)"
+            [routerLink]="item.route"
           >
             <i class="main-icon" [class]="item.icon"></i>
             <span class="sidebar-item-text">{{ item.label }}</span>
@@ -27,7 +30,9 @@
           @if(item.children && !isSidebarCollapsed && item.isOpen) {
           <ul class="sidebar-submenu" [@submenuAnimation]>
             <li *ngFor="let child of item.children">
-              <a class="sidebar-item sidebar-subitem">
+              <a
+                class="sidebar-item sidebar-subitem"
+                [routerLink]="child.route">
                 <i [class]="child.icon"></i>
                 <span class="sidebar-item-text">{{ child.label }}</span>
               </a>

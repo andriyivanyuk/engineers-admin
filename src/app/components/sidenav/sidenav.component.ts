@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import {
   Component,
   EventEmitter,
@@ -19,13 +20,14 @@ interface MenuItem {
   label: string;
   children?: MenuItem[];
   isOpen?: boolean;
+  route?: string;
 }
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
-  imports: [CommonModule, MaterialModule],
+  imports: [RouterLink, CommonModule, MaterialModule],
   animations: [
     trigger('submenuAnimation', [
       transition(':enter', [
@@ -46,25 +48,46 @@ export class SidenavComponent {
     {
       icon: 'fal fa-home fa-2xl',
       label: 'Dashboard',
+      route: 'dashboard',
+    },
+    {
+      icon: 'fal fa-list fa-2xl',
+      label: 'Manage categories',
       isOpen: false,
       children: [
-        { icon: 'fal fa-chart-pie', label: 'Analytics' },
-        { icon: 'fal fa-tasks', label: 'Projects' },
+        {
+          icon: 'fal fa-chart-pie',
+          label: 'Analytics',
+          route: '',
+        },
+        {
+          icon: 'fal fa-tasks',
+          label: 'Projects',
+          route: '',
+        },
       ],
     },
     {
-      icon: 'fal fa-cog',
+      icon: 'fal fa-briefcase fa-2xl',
       label: 'Manage Products',
       isOpen: false,
       children: [
-        { icon: 'fal fa-lock', label: 'Product List' },
-        { icon: 'fal fa-user', label: 'Create Product' },
-        { icon: 'fal fa-lock', label: 'Security' },
+        {
+          icon: 'fal fa-lock',
+          label: 'Product List',
+          route: '',
+        },
+        {
+          icon: 'fal fa-user',
+          label: 'Create Product',
+          route: 'create-product',
+        },
+        {
+          icon: 'fal fa-lock',
+          label: 'Security',
+          route: '',
+        },
       ],
-    },
-    {
-      icon: 'fal fa-envelope',
-      label: 'Messages',
     },
   ];
 

@@ -1,0 +1,36 @@
+.create-form {
+  max-width: 800px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.file-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+
+  &-title {
+    font-weight: 600;
+  }
+}
+
+.btn-group {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.submit-btn {
+  background-color: #285059 !important;
+  color: #ffff !important;
+}
+
+.clear-btn {
+  background-color: #ffff !important;
+  color: #285059 !important;
+  border-color: #285059 !important;
+}
