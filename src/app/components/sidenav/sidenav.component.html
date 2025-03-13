@@ -5,6 +5,7 @@
     }}</a>
   </div>
   <div class="sidebar-menu">
+    <!-- <mat-icon fontIcon="dashboard"></mat-icon> -->
     <ul class="items-list">
       @for(item of menuItems; track item.label) {
       <ng-container>
@@ -32,7 +33,8 @@
             <li *ngFor="let child of item.children">
               <a
                 class="sidebar-item sidebar-subitem"
-                [routerLink]="child.route">
+                [routerLink]="child.route"
+              >
                 <i [class]="child.icon"></i>
                 <span class="sidebar-item-text">{{ child.label }}</span>
               </a>
@@ -43,5 +45,10 @@
       </ng-container>
       }
     </ul>
+  </div>
+  <div class="btn-group" matTooltip="Log out system" (click)="signOut()">
+    <button mat-icon-button>
+      <mat-icon>logout</mat-icon>
+    </button>
   </div>
 </div>

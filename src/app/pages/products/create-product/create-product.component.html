@@ -1,51 +1,199 @@
-<app-heading [title]="title"></app-heading>
-<form class="create-form">
-  <mat-form-field>
-    <mat-label>Title</mat-label>
-    <input matInput placeholder="Enter title" />
-  </mat-form-field>
+<div>
+  <app-heading [title]="title"></app-heading>
+  <form class="create-form" [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        placeholder="Enter title"
+        type="text"
+        formControlName="title"
+      />
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Price</mat-label>
-    <input matInput placeholder="Enter price" />
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Price, hrn</mat-label>
+      <input
+        matInput
+        placeholder="Enter price"
+        type="number"
+        formControlName="price"
+      />
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Amount</mat-label>
-    <input matInput placeholder="Enter amount" />
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <input
+        matInput
+        type="number"
+        placeholder="Enter amount"
+        formControlName="stock"
+      />
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Product status</mat-label>
-    <mat-select>
-      <mat-option>None</mat-option>
-      <mat-option value="option1">Option 1</mat-option>
-      <mat-option value="option2">Option 2</mat-option>
-      <mat-option value="option3">Option 3</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Product status</mat-label>
+      <mat-select>
+        <mat-option>None</mat-option>
+        <mat-option value="option1">Option 1</mat-option>
+        <mat-option value="option2">Option 2</mat-option>
+        <mat-option value="option3">Option 3</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Product category</mat-label>
-    <mat-select>
-      <mat-option>None</mat-option>
-      <mat-option value="option1">Option 1</mat-option>
-      <mat-option value="option2">Option 2</mat-option>
-      <mat-option value="option3">Option 3</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Product category</mat-label>
+      <mat-select>
+        <mat-option>None</mat-option>
+        <mat-option value="option1">Option 1</mat-option>
+        <mat-option value="option2">Option 2</mat-option>
+        <mat-option value="option3">Option 3</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Product description</mat-label>
-    <textarea matInput placeholder="Enter description"></textarea>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Product description</mat-label>
+      <textarea matInput placeholder="Enter description"></textarea>
+    </mat-form-field>
 
-  <div class="file-wrapper">
-    <mat-label class="file-wrapper-title">Product images</mat-label>
-    <input type="file" multiple />
-  </div>
-  <div class="btn-group">
-    <button class="submit-btn" type="button" mat-flat-button>Create</button>
-    <button class="clear-btn" type="button" mat-stroked-button>Clear</button>
-  </div>
-</form>
+    <div>
+      <ng-container formArrayName="attributes">
+        <div class="attribute-add">
+          <button mat-icon-button (click)="addAttribute()">
+            <mat-icon>add</mat-icon>
+          </button>
+
+          <span>Add attribute</span>
+        </div>
+
+        @for (attributeForm of attributeFormGroups; track attributeForm; let
+        index = $index) {
+        <ng-container>
+          <div class="attribute-row" [formGroup]="attributeForm">
+            <div class="attribute-label">
+              <mat-label class="f-w-600 m-b-8 d-block m-t-10">
+                Назва
+              </mat-label>
+              <div class="d-flex align-items-center justify-content-between">
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100 form-field"
+                  color="primary"
+                >
+                  <input
+                    matInput
+                    formControlName="title"
+                    placeholder="Назва атрибуту"
+                  />
+                </mat-form-field>
+                <button
+                  class="trash-icon"
+                  mat-icon-button
+                  (click)="deleteAttributeControl(index)"
+                >
+                  <mat-icon
+                    class="d-flex align-items-center"
+                    matTooltip="Видалити атрибут повністю"
+                  >
+                    <button mat-icon-button>
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <div formArrayName="attributeValues">
+              @for (valueForm of attributeForms[index]; track valueForm; let j =
+              $index) {
+              <ng-container>
+                <div [formGroup]="valueForm" class="attribute-label">
+                  <mat-label class="f-w-600 m-b-8 d-block m-t-10">
+                    Значення #{{ j + 1 }}
+                  </mat-label>
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100 form-field"
+                      color="primary"
+                    >
+                      <input
+                        matInput
+                        formControlName="attributeValueTitle"
+                        placeholder="Значення атрибуту"
+                      />
+                    </mat-form-field>
+                    <button
+                      class="trash-icon"
+                      mat-icon-button
+                      (click)="deleteAttributeValue(index, j)"
+                    >
+                      <button mat-icon-button>
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </button>
+                  </div>
+                </div>
+              </ng-container>
+              }
+            </div>
+          </div>
+          <div
+            class="d-flex align-items-center attribute-add"
+            (click)="addAttributeValue(index)"
+          >
+            <mat-icon class="d-flex align-items-center">
+              <button mat-icon-button>
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-icon>
+            <span>Додати значення</span>
+          </div>
+        </ng-container>
+        }
+      </ng-container>
+    </div>
+
+    <div class="images-wrapper">
+      <mat-label>Product images</mat-label>
+      <input type="file" (change)="onFileSelect($event)" multiple />
+      @for(image of images.controls; track image; let index = $index) {
+      @if(imageActive) {
+      <div formArrayName="images">
+        <div [formGroupName]="index" class="img-upload">
+          <img
+            [src]="image.get('path')!.value"
+            [class.selected-image]="index === form.get('primary')!.value"
+            style="width: 100px; height: auto"
+            (click)="setPrimaryImage(index)"
+          />
+
+          <button mat-icon-button matTooltip="Remove image">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      } }
+
+      <p>Головне фото: {{ selectedImageName | async }}</p>
+      @if(form.get('images')!.errors?.['minImageCount']) {
+      <div class="empty-img-error">
+        Будь ласка, завантажте хоча б одне зображення.
+      </div>
+      }
+    </div>
+    <div class="btn-group">
+      <button
+        [disabled]="!form.valid"
+        type="button"
+        mat-flat-button
+        (click)="createProduct()"
+      >
+        Create
+      </button>
+      <button type="button" mat-stroked-button (click)="clear()">Clear</button>
+    </div>
+  </form>
+</div>

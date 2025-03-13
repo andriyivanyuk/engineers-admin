@@ -1,0 +1,57 @@
+<div class="register-wrapper">
+  <form [formGroup]="form" class="main-form">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Sign Up</h3>
+        <div class="card-content">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input
+              type="text"
+              formControlName="username"
+              matInput
+              placeholder="Enter username"
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              formControlName="email"
+              matInput
+              placeholder="Enter email"
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              formControlName="password"
+              matInput
+              placeholder="Enter password"
+            />
+          </mat-form-field>
+
+          <div class="form-group">
+            <div class="additional-account">
+              <span class="link-label"
+                >Already have an acount?. Sign in system</span
+              >
+              <a class="link" routerLink="/authentication/login">login</a>
+            </div>
+          </div>
+
+          <button
+            mat-flat-button
+            [disabled]="form.invalid"
+            (click)="createAccount()"
+          >
+            Create Account
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

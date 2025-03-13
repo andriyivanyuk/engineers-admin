@@ -1,4 +1,4 @@
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   Component,
   EventEmitter,
@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { MaterialModule } from '../../material.module';
+import { TokenStorageService } from '../../services/token-storage.service';
 // import { DeleteProductComponent } from '../dialogs/delete-product/delete-product.component';
 
 interface MenuItem {
@@ -39,8 +40,12 @@ interface MenuItem {
       ]),
     ]),
   ],
+  providers: [TokenStorageService],
 })
 export class SidenavComponent {
+  readonly router = inject(Router);
+  readonly tokenStorage = inject(TokenStorageService);
+
   @Input() isSidebarCollapsed = false;
   @Output() sidebarToggle = new EventEmitter<void>();
 
@@ -79,7 +84,7 @@ export class SidenavComponent {
         },
         {
           icon: 'fal fa-user',
-          label: 'Create Product',
+          label: 'Create product',
           route: 'create-product',
         },
         {
@@ -99,6 +104,12 @@ export class SidenavComponent {
     if (!this.isSidebarCollapsed && item.children) {
       item.isOpen = !item.isOpen;
     }
+  }
+
+  public signOut() {
+    this.tokenStorage.clearToken();
+    this.router.navigate(['/authentication/login']);
+    console.log(this.tokenStorage.getToken());
   }
 
   readonly animal = signal('');

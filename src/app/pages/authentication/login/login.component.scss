@@ -1,0 +1,52 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.form-group label {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.main-form {
+  width: 100%;
+  max-width: 450px;
+}
+
+.card-title {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.card-body {
+  padding: 35px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.additional-account {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .link-label {
+    font-size: 14px;
+  }
+
+  a {
+    cursor: pointer;
+    color: #005cbb;
+  }
+}

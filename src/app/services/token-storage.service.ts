@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-// import { LoginResponse } from '../models/loginResponse';
+import { LoginResponse } from '../pages/authentication/models/loginResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class TokenStorageService {
     sessionStorage.removeItem(this.userData);
   }
 
-  public setUserSession(result: any): void {
+  public setUserSession(result: LoginResponse): void {
     if (result.token) {
       const data = {
         username: result.user.username,

@@ -3,15 +3,16 @@
 }
 
 .navbar {
-  flex-grow: 1;
   margin-left: 250px;
   transition: all 0.3s ease-in-out;
   overflow-y: auto;
+  position: sticky;
+  top: 0;
+  z-index: 55;
 
   &-inner {
     color: white;
     background-color: #ffffff;
-    // max-width: 1200px;
     margin: 0 auto;
     border-bottom: 2px solid #e2e8f0;
   }
