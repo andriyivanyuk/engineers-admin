@@ -8,6 +8,7 @@ import { VerifyComponent } from './pages/authentication/verify/verify.component'
 import { RegisterComponent } from './pages/authentication/register/register.component';
 import { AuthGuard } from './pages/authentication/guards/auth.guard';
 import { NotFoundComponent } from './pages/authentication/not-found/not-found.component';
+import { ProductListComponent } from './pages/products/product-list/product-list.component';
 
 export const routes: Routes = [
   {
@@ -35,8 +36,7 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'create-product', component: CreateProductComponent },
-      // { path: 'create-product', component: CreateProductComponent },
-      // { path: 'create-category', component: AddCategoryComponent },
+      { path: 'product-list', component: ProductListComponent },
     ],
   },
   {

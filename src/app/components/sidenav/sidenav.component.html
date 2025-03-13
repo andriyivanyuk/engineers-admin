@@ -19,7 +19,8 @@
             (click)="toggleMenuItem(item)"
             [routerLink]="item.route"
           >
-            <i class="main-icon" [class]="item.icon"></i>
+            <mat-icon class="main-icon">{{ item.icon }}</mat-icon>
+            <!-- <i class="main-icon" [class]="item.icon"></i> -->
             <span class="sidebar-item-text">{{ item.label }}</span>
             @if(item.children && !isSidebarCollapsed) {
             <i
@@ -35,7 +36,7 @@
                 class="sidebar-item sidebar-subitem"
                 [routerLink]="child.route"
               >
-                <i [class]="child.icon"></i>
+                <mat-icon class="child-icon">{{ child.icon }}</mat-icon>
                 <span class="sidebar-item-text">{{ child.label }}</span>
               </a>
             </li>
@@ -46,8 +47,8 @@
       }
     </ul>
   </div>
-  <div class="btn-group" matTooltip="Log out system" (click)="signOut()">
-    <button mat-icon-button>
+  <div class="btn-group" (click)="signOut()">
+    <button mat-icon-button matTooltip="Log out system">
       <mat-icon>logout</mat-icon>
     </button>
   </div>

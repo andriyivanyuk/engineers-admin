@@ -35,7 +35,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CreateProductComponent implements OnInit {
   title: string = 'Create product';
-  
+
   private destroy$ = new Subject<void>();
   attributeForms: FormGroup[][] = [];
 
@@ -55,11 +55,14 @@ export class CreateProductComponent implements OnInit {
   readonly productService = inject(ProductService);
 
   selectedImageName: BehaviorSubject<string> = new BehaviorSubject<string>(
-    'не вибрано'
+    'is not selected'
   );
 
   ngOnInit() {
+    this.statuses$ = this.productStatusService.statuses$;
+    this.categories$ = this.categoryService.getCategories();
     this.createForm();
+    this.prefillForm();
   }
 
   public createForm() {
@@ -88,8 +91,8 @@ export class CreateProductComponent implements OnInit {
   private updateSelectedImageName(index: number) {
     const image = this.images.at(index);
     const imageName = image
-      ? `Фото ${parseInt(index.toString(), 10) + 1}`
-      : 'Будь ласка, оберіть головне фото';
+      ? `Image ${parseInt(index.toString(), 10) + 1}`
+      : 'Please select main image';
     this.selectedImageName.next(imageName);
     this.form.patchValue({ primary: index });
   }
@@ -239,48 +242,49 @@ export class CreateProductComponent implements OnInit {
   }
 
   public createProduct() {
-    if (this.form.valid) {
-      this.loader.start();
-      const formData = new FormData();
+    if (!this.form.valid) {
+      return;
+    }
+    this.loader.start();
+    const formData = new FormData();
 
-      formData.append('title', this.form.get('title')?.value);
-      formData.append('description', this.form.get('description')?.value);
-      formData.append('price', this.form.get('price')?.value);
-      formData.append('stock', this.form.get('stock')?.value);
-      formData.append('category_id', this.form.get('category_id')?.value);
-      formData.append('status_id', this.form.get('status_id')?.value);
+    formData.append('title', this.form.get('title')?.value);
+    formData.append('description', this.form.get('description')?.value);
+    formData.append('price', this.form.get('price')?.value);
+    formData.append('stock', this.form.get('stock')?.value);
+    formData.append('category_id', this.form.get('category_id')?.value);
+    formData.append('status_id', this.form.get('status_id')?.value);
 
-      const images = this.images.controls;
-      images.forEach((imageControl, index) => {
-        const file = imageControl.get('file')!.value;
-        if (file) {
-          formData.append('images', file, file.name);
-        }
-
-        if (index.toString() === this.form.get('primary')!.value.toString()) {
-          formData.append('primary', index.toString());
-        }
-      });
-
-      const attributes = this.mapValuesAttributes(this.attributes.value);
-      if (!!attributes?.length) {
-        formData.append('attributes', JSON.stringify(attributes));
+    const images = this.images.controls;
+    images.forEach((imageControl, index) => {
+      const file = imageControl.get('file')!.value;
+      if (file) {
+        formData.append('images', file, file.name);
       }
 
-      this.productService.addProduct(formData).subscribe({
-        next: () => {
-          this.imageActive = false;
-          this.form.reset();
-          this.loader.stop();
-          this.snackBar.open('Продукт створено', 'Закрити', {
-            duration: 3000,
-          });
-        },
-        error: (error) => {
-          this.loader.stop();
-          console.error('Помилка при додаванні продукту:', error);
-        },
-      });
+      if (index.toString() === this.form.get('primary')!.value.toString()) {
+        formData.append('primary', index.toString());
+      }
+    });
+
+    const attributes = this.mapValuesAttributes(this.attributes.value);
+    if (!!attributes?.length) {
+      formData.append('attributes', JSON.stringify(attributes));
     }
+
+    this.productService.addProduct(formData).subscribe({
+      next: () => {
+        this.imageActive = false;
+        this.form.reset();
+        this.loader.stop();
+        this.snackBar.open('Продукт створено', 'Закрити', {
+          duration: 3000,
+        });
+      },
+      error: (error) => {
+        this.loader.stop();
+        console.error('Помилка при додаванні продукту:', error);
+      },
+    });
   }
 }

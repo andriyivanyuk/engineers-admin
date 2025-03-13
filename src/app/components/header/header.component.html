@@ -1,11 +1,6 @@
 <header class="navbar" [ngClass]="{ 'navbar-expanded': isSidebarCollapsed }">
   <mat-toolbar class="navbar-inner">
-    <button
-      (click)="onSidebarToggle()"
-      mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
-    >
+    <button (click)="onSidebarToggle()" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
     <span class="example-spacer"></span>

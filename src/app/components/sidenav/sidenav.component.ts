@@ -14,15 +14,9 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { MaterialModule } from '../../material.module';
 import { TokenStorageService } from '../../services/token-storage.service';
+import { MenuItem } from './menuItem';
+import { menuItems } from './navData';
 // import { DeleteProductComponent } from '../dialogs/delete-product/delete-product.component';
-
-interface MenuItem {
-  icon: string;
-  label: string;
-  children?: MenuItem[];
-  isOpen?: boolean;
-  route?: string;
-}
 
 @Component({
   selector: 'app-sidenav',
@@ -49,52 +43,7 @@ export class SidenavComponent {
   @Input() isSidebarCollapsed = false;
   @Output() sidebarToggle = new EventEmitter<void>();
 
-  menuItems: MenuItem[] = [
-    {
-      icon: 'fal fa-home fa-2xl',
-      label: 'Dashboard',
-      route: 'dashboard',
-    },
-    {
-      icon: 'fal fa-list fa-2xl',
-      label: 'Manage categories',
-      isOpen: false,
-      children: [
-        {
-          icon: 'fal fa-chart-pie',
-          label: 'Analytics',
-          route: '',
-        },
-        {
-          icon: 'fal fa-tasks',
-          label: 'Projects',
-          route: '',
-        },
-      ],
-    },
-    {
-      icon: 'fal fa-briefcase fa-2xl',
-      label: 'Manage Products',
-      isOpen: false,
-      children: [
-        {
-          icon: 'fal fa-lock',
-          label: 'Product List',
-          route: '',
-        },
-        {
-          icon: 'fal fa-user',
-          label: 'Create product',
-          route: 'create-product',
-        },
-        {
-          icon: 'fal fa-lock',
-          label: 'Security',
-          route: '',
-        },
-      ],
-    },
-  ];
+  menuItems: MenuItem[] = menuItems;
 
   public toggleSidebar() {
     this.sidebarToggle.emit();
@@ -109,7 +58,6 @@ export class SidenavComponent {
   public signOut() {
     this.tokenStorage.clearToken();
     this.router.navigate(['/authentication/login']);
-    console.log(this.tokenStorage.getToken());
   }
 
   readonly animal = signal('');

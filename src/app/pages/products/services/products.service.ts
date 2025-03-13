@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { CreateProductResponse } from '../models/createProductResponse';
+import { ProductListResponse } from '../models/productListResponse';
+import { Product } from '../models/product';
+import { ProductImage } from '../models/productImage';
 
 @Injectable()
 export class ProductService {
@@ -13,7 +16,7 @@ export class ProductService {
     page: number,
     limit: number,
     search: string = ''
-  ): Observable<any> {
+  ): Observable<ProductListResponse> {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('limit', limit.toString());
@@ -22,20 +25,22 @@ export class ProductService {
       params = params.set('search', search);
     }
 
-    return this.http.get<any>(`${this.apiUrl}/products`, { params }).pipe(
-      map((result) => ({
-        total: result.total,
-        page: result.page,
-        limit: result.limit,
-        products: result.products.map((product: any) => ({
-          ...product,
-          images: product.images?.map((image: any) => ({
-            ...image,
-            fullPath: `http://localhost:5500/${image.image_path}`,
+    return this.http
+      .get<ProductListResponse>(`${this.apiUrl}/products`, { params })
+      .pipe(
+        map((result) => ({
+          total: result.total,
+          page: result.page,
+          limit: result.limit,
+          products: result.products.map((product: Product) => ({
+            ...product,
+            images: product.images?.map((image: ProductImage) => ({
+              ...image,
+              fullPath: `http://localhost:5500/${image.image_path}`,
+            })),
           })),
-        })),
-      }))
-    );
+        }))
+      );
   }
 
   public mapProducts(products: any[]): any[] {

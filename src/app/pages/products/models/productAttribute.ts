@@ -1,4 +1,4 @@
 export interface ProductAttribute {
-  key: string;
-  values: string[];
+  key?: string;
+  values?: string[];
 }
