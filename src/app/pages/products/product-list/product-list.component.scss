@@ -1,8 +1,15 @@
 table {
+  border-radius: 16px;
+  background-color: #ffffff;
   tr {
     cursor: pointer;
   }
 }
+
+::ng-deep .product-table thead {
+  border-radius: 16px;
+}
+
 .empty {
   text-align: center;
 }
@@ -11,4 +18,15 @@ table {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.image-path {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  padding: 10px;
+
+  img {
+    border-radius: 8px;
+  }
 }

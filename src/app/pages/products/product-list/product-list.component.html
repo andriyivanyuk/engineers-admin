@@ -12,11 +12,21 @@
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
   } @if(isLoaded) {
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
+  <div>
+    <table mat-table [dataSource]="dataSource" matSort class="product-table">
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
-        <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+        <td mat-cell *matCellDef="let row">
+          <div class="image-path">
+            <img
+              [src]="row.image_path"
+              alt="users"
+              width="60"
+              class="rounded"
+            />
+            <p>{{ row.title }}</p>
+          </div>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="amount">
@@ -26,7 +36,7 @@
 
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-        <td mat-cell *matCellDef="let row">{{ row.status_name }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.status }}</td>
       </ng-container>
 
       <ng-container matColumnDef="price">

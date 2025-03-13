@@ -3,6 +3,6 @@ export interface ViewProduct {
   title: string;
   price: string;
   stock: number;
-  status_name: string;
-  fullPath?: string;
+  status: string;
+  image_path?: string;
 }

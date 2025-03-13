@@ -1,7 +1,7 @@
-import { Product } from './product';
+import { ViewProduct } from './viewProduct';
 
 export interface ProductListResponse {
-  products: Product[];
+  products: ViewProduct[];
   total: number;
   page: number;
   limit: number;
