@@ -1,5 +1,6 @@
 export interface LoginResponse {
   user: {
+    role: string;
     user_id: number;
     username: string;
     password_hash: string;

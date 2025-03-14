@@ -1,5 +1,7 @@
+@use "../../../assets/scss/variables" as vars;
+
 .sidebar {
-  background-color: #285059;
+  background-color: vars.$main-color;
   color: #ecf0f1;
   height: 100vh;
   width: 250px;
@@ -83,11 +85,11 @@
 
   .child-icon {
     font-size: 20px;
-    margin-right: 1rem;
+    margin-right: 12px;
   }
 
   i {
-    margin-right: 1rem;
+    margin-right: 12px;
 
     &.sidebar-item-arrow {
       margin-left: auto;
@@ -101,10 +103,11 @@
   }
 
   &-text {
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-    flex-shrink: 0;
-    font-size: 14px;
+    font-size: 13px;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, max-width 0.3s ease;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   &.has-children {
@@ -132,7 +135,10 @@
     i {
       margin-right: 0;
     }
-    &-text,
+    &-text {
+      opacity: 0;
+      max-width: 0;
+    }
     &-arrow {
       opacity: 0;
       width: 0;

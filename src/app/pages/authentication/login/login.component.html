@@ -2,57 +2,57 @@
   <form [formGroup]="form" class="main-form">
     <div class="card">
       <div class="card-body">
-        <h3 class="card-title">Sign In</h3>
+        <h3 class="card-title">Ввійти</h3>
 
         <div class="card-content">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input
               type="email"
               formControlName="email"
               matInput
-              placeholder="Enter email"
+              placeholder="Введіть email"
             />
 
             @if(form.get('email')?.touched &&
             form.get('email')?.hasError('required')) {
-            <mat-error>Email is required</mat-error>
+            <mat-error>Email не може бути пустим</mat-error>
             } @if(form.get('email')?.touched &&
             form.get('email')?.hasError('email')) {
-            <mat-error>Please, enter a valid email</mat-error>
+            <mat-error>Будь ласка введіть валідний email</mat-error>
             }
           </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>Password</mat-label>
+          <mat-form-field appearance="outline">
+            <mat-label>Пароль</mat-label>
             <input
               matInput
-              placeholder="Enter password"
+              placeholder="Введіть пароль"
               formControlName="password"
             />
 
             @if(form.get('password')?.touched &&
             form.get('password')?.hasError('required')) {
-            <mat-error>Password is required</mat-error>
+            <mat-error>Пароль не може бути пустим.</mat-error>
             } @if(form.get('password')?.touched &&
             form.get('password')?.hasError('minlength')) {
-            <mat-error>Password should contain at least 4 symbols</mat-error>
+            <mat-error>Пароль має містити щонайменше 4 символа</mat-error>
             }
           </mat-form-field>
           <div class="form-group">
             <div class="additional-account">
-              <span class="link-label"> Don't have an account? </span>
-              <a class="link" routerLink="/authentication/register">sign up</a>
+              <span class="link-label">Немає акаунта?</span>
+              <a class="link" routerLink="/authentication/register"
+                >Створити акаунт</a
+              >
             </div>
           </div>
           <button
-            type="button"
-            mat-flat-button
             [disabled]="form.invalid"
+            class="primary-button"
             (click)="signIn()"
-            class="login-btn"
           >
-            Sign In
+            Ввійти
           </button>
         </div>
       </div>

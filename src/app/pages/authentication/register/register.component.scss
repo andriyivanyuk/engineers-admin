@@ -1,3 +1,5 @@
+@use "../../../../assets/scss/variables" as vars;
+
 .register-wrapper {
   display: flex;
   justify-content: center;
@@ -21,8 +23,11 @@
 }
 
 .card-title {
+  font-size: 18px;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 25px;
+  color: vars.$main-color;
+  letter-spacing: 1px;
 }
 
 .card-body {
@@ -42,10 +47,12 @@
 
   .link-label {
     font-size: 14px;
+    font-weight: 500;
+    color: vars.$main-color;
   }
 
   a {
     cursor: pointer;
-    color: #005cbb;
+    color: vars.$main-color;
   }
 }

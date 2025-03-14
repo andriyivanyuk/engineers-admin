@@ -1,5 +1,6 @@
+@use "./assets/scss/main.scss" as main;
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
-// @import "@angular/material/prebuilt-themes/magenta-violet.css";
 
 * {
   margin: 0;
@@ -15,10 +16,10 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  border-radius: 0.5rem;
+  border-radius: 16px;
   background-color: #fff;
   margin: 1.25rem 0 1.25rem 0;
-  box-shadow: 0 0.25rem 0.5rem #e6edef;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
   .card-head {
     padding: 1rem 1.5rem;

@@ -1,0 +1,17 @@
+.main-form {
+  max-width: 700px;
+
+  .form-field {
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .btn-mr {
+    margin-bottom: 16px;
+  }
+}

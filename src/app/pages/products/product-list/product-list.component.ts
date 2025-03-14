@@ -31,7 +31,7 @@ import { ViewProduct } from '../models/viewProduct';
   providers: [ProductService],
 })
 export class ProductListComponent implements OnInit, OnDestroy {
-  title: string = 'Products list';
+  title: string = 'Список продуктів';
   form!: FormGroup;
 
   private subscriptions: Subscription = new Subscription();

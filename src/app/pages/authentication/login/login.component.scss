@@ -1,3 +1,5 @@
+@use "../../../../assets/scss/variables" as vars;
+
 .login-wrapper {
   display: flex;
   justify-content: center;
@@ -23,7 +25,10 @@
 
 .card-title {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 25px;
+  font-size: 18px;
+  color: vars.$main-color;
+  letter-spacing: 1px;
 }
 
 .card-body {
@@ -43,10 +48,12 @@
 
   .link-label {
     font-size: 14px;
+    color: vars.$main-color;
+    font-weight: 500;
   }
 
   a {
     cursor: pointer;
-    color: #005cbb;
+    color: vars.$main-color;
   }
 }

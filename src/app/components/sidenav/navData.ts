@@ -1,24 +1,36 @@
-import { MenuItem } from "./menuItem";
+import { MenuItem } from './menuItem';
 
 export const menuItems: MenuItem[] = [
   {
+    icon: 'admin_panel_settings',
+    label: 'Управління доступом',
+    isOpen: false,
+    children: [
+      {
+        icon: 'code',
+        label: 'Генерувати код',
+        route: 'superadmin',
+      },
+    ],
+  },
+  {
     icon: 'dashboard',
-    label: 'Dashboard',
+    label: 'Головна',
     route: 'dashboard',
   },
   {
     icon: 'sell',
-    label: 'Manage products',
+    label: 'Управління продуктами',
     isOpen: false,
     children: [
       {
         icon: 'list',
-        label: 'Product List',
+        label: 'Список продуктів',
         route: 'product-list',
       },
       {
         icon: 'add_circle',
-        label: 'Create product',
+        label: 'Створити',
         route: 'create-product',
       },
     ],

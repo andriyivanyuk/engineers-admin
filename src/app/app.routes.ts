@@ -9,6 +9,7 @@ import { RegisterComponent } from './pages/authentication/register/register.comp
 import { AuthGuard } from './pages/authentication/guards/auth.guard';
 import { NotFoundComponent } from './pages/authentication/not-found/not-found.component';
 import { ProductListComponent } from './pages/products/product-list/product-list.component';
+import { SuperAdminComponent } from './pages/super-admin/super-admin.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'create-product', component: CreateProductComponent },
       { path: 'product-list', component: ProductListComponent },
+      { path: 'superadmin', component: SuperAdminComponent },
     ],
   },
   {

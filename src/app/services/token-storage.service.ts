@@ -31,6 +31,7 @@ export class TokenStorageService {
         email: result.user.email,
         token: result.token,
         userId: result.user.user_id,
+        role: result.user.role,
       };
       this.setStorageItem(this.userData, JSON.stringify(data));
       this.isAuthenticated = true;

@@ -1,0 +1,23 @@
+<div>
+  <app-heading [title]="title"></app-heading>
+  <form [formGroup]="form" class="main-form">
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Код</mat-label>
+        <input formControlName="title" matInput />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="copyCode()"
+          aria-label="Copy code"
+        >
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button class="primary-button btn-mr" (click)="generateCode()">
+        Згенерувати
+      </button>
+    </div>
+  </form>
+</div>
