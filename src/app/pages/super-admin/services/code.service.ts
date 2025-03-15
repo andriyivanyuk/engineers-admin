@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { TokenStorageService } from '../../../services/token-storage.service';
 import { Observable } from 'rxjs';
 import { Code } from '../models/code';
-import { RegistrationCode } from '../models/registrationCode';
+import { RegistrationCodeResponse } from '../models/registrationCode';
 
 @Injectable()
 export class CodeService {
@@ -29,9 +29,16 @@ export class CodeService {
     );
   }
 
-  public listCodes(): Observable<RegistrationCode[]> {
-    return this.http.get<RegistrationCode[]>(
+  public listCodes(): Observable<RegistrationCodeResponse> {
+    return this.http.get<RegistrationCodeResponse>(
       `${this.apiUrl}/registration-codes`,
+      { headers: this.getAuthHeaders() }
+    );
+  }
+
+  public deleteCode(code: string): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(
+      `${this.apiUrl}/registration-codes/${code}`,
       { headers: this.getAuthHeaders() }
     );
   }

@@ -1,18 +1,18 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { HeadingComponent } from '../../components/heading/heading.component';
-import { CodeService } from './services/code.service';
-import { MaterialModule } from '../../material.module';
+import { HeadingComponent } from '../../../components/heading/heading.component';
+import { CodeService } from '../services/code.service';
+import { MaterialModule } from '../../../material.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-super-admin',
-  templateUrl: './super-admin.component.html',
-  styleUrls: ['./super-admin.component.scss'],
+  selector: 'app-create-code',
+  templateUrl: './create-code.component.html',
+  styleUrls: ['./create-code.component.scss'],
   imports: [HeadingComponent, MaterialModule, ReactiveFormsModule],
   providers: [CodeService],
 })
-export class SuperAdminComponent implements OnInit {
+export class CreateCodeComponent implements OnInit {
   title: string = 'Генерація коду';
 
   form!: FormGroup;

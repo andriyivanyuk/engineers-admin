@@ -1,4 +1,4 @@
-@use "../../../assets/scss/variables" as vars;
+@use "../../../../public/assets/scss/variables" as vars;
 
 .sidebar {
   background-color: vars.$main-color;
@@ -20,15 +20,10 @@
   align-items: center;
   padding: 16px;
   position: relative;
-}
 
-.sidebar-logo {
-  color: #fff;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  flex-shrink: 0;
+  .logo-img {
+    width: 150px;
+  }
 }
 
 .sidebar-menu {
@@ -65,22 +60,14 @@
   align-items: center;
   color: #ecf0f1;
   text-decoration: none;
-  padding: 12px 16px;
-  transition: all 0.3s ease;
+  padding: 12px;
+  transition: all 0.5s ease;
   cursor: pointer;
   height: 45px;
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  &.menu-item-active {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
   .main-icon {
-    font-size: 22px;
-    margin-right: 1rem;
+    font-size: 24px;
+    margin-right: 12px;
   }
 
   .child-icon {
@@ -146,7 +133,17 @@
     }
   }
 
+  .btn-group {
+    span {
+      display: none;
+    }
+  }
+
   .sidebar-submenu {
     display: none;
   }
+}
+
+.active-link {
+  background-color: rgba(255, 255, 255, 0.2);
 }

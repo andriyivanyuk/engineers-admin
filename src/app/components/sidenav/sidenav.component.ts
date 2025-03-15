@@ -1,13 +1,5 @@
-import { Router, RouterLink } from '@angular/router';
-import {
-  Component,
-  EventEmitter,
-  inject,
-  Input,
-  model,
-  Output,
-  signal,
-} from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject, input, model, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -22,7 +14,7 @@ import { menuItems } from './navData';
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
-  imports: [RouterLink, CommonModule, MaterialModule],
+  imports: [RouterLink, RouterLinkActive, CommonModule, MaterialModule],
   animations: [
     trigger('submenuAnimation', [
       transition(':enter', [
@@ -36,21 +28,17 @@ import { menuItems } from './navData';
   ],
   providers: [TokenStorageService],
 })
-export class SidenavComponent {
+export class SidenavComponent implements OnInit {
+  isSidebarCollapsed = input<boolean>(false);
+  menuItems: MenuItem[] = [];
+
   readonly router = inject(Router);
   readonly tokenStorage = inject(TokenStorageService);
 
-  @Input() isSidebarCollapsed = false;
-  @Output() sidebarToggle = new EventEmitter<void>();
-
-  menuItems: MenuItem[] = menuItems;
-
-  public toggleSidebar() {
-    this.sidebarToggle.emit();
-  }
+  constructor() {}
 
   public toggleMenuItem(item: MenuItem) {
-    if (!this.isSidebarCollapsed && item.children) {
+    if (!this.isSidebarCollapsed() && item.children) {
       item.isOpen = !item.isOpen;
     }
   }
@@ -77,4 +65,21 @@ export class SidenavComponent {
   //     }
   //   });
   // }
+
+  ngOnInit(): void {
+    this.mapMenuItems();
+  }
+
+  public mapMenuItems(): void {
+    const user = this.tokenStorage.getUserSession();
+    let result;
+    if (user.role === 'superadmin') {
+      result = menuItems.filter((item) => item.label === 'Управління доступом');
+    } else {
+      result = menuItems.filter((item) => item.label !== 'Управління доступом');
+    }
+    if (result) {
+      this.menuItems = result;
+    }
+  }
 }

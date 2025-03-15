@@ -1,0 +1,29 @@
+@use "../../../../assets/scss/variables" as vars;
+
+.product-table {
+  background-color: vars.$white-color;
+  tr {
+    cursor: pointer;
+    color: vars.$main-color;
+  }
+
+  mat-icon {
+    color: vars.$main-color;
+  }
+}
+
+.delete-btn {
+  margin-left: -12px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty {
+  margin-top: 1rem;
+  text-align: center;
+  color: vars.$main-color;
+}

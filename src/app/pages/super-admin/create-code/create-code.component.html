@@ -6,10 +6,10 @@
         <mat-label>Код</mat-label>
         <input formControlName="title" matInput />
         <button
+          matTooltip="Копіювати код"
           mat-icon-button
           matSuffix
           (click)="copyCode()"
-          aria-label="Copy code"
         >
           <mat-icon>content_copy</mat-icon>
         </button>

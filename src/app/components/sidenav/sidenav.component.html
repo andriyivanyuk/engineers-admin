@@ -1,11 +1,10 @@
-<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }">
+<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed() }">
   <div class="sidebar-header">
-    <a class="sidebar-logo">{{
-      isSidebarCollapsed ? "D" : "Digital Engineers"
-    }}</a>
+    <a>
+      <img src="../../../assets/images/logo.png" class="logo-img" />
+    </a>
   </div>
   <div class="sidebar-menu">
-    <!-- <mat-icon fontIcon="dashboard"></mat-icon> -->
     <ul class="items-list">
       @for(item of menuItems; track item.label) {
       <ng-container>
@@ -18,23 +17,24 @@
             }"
             (click)="toggleMenuItem(item)"
             [routerLink]="item.route"
+            routerLinkActive="active-link"
           >
             <mat-icon class="main-icon">{{ item.icon }}</mat-icon>
-            <!-- <i class="main-icon" [class]="item.icon"></i> -->
             <span class="sidebar-item-text">{{ item.label }}</span>
-            @if(item.children && !isSidebarCollapsed) {
+            @if(item.children && !isSidebarCollapsed()) {
             <i
               class="fas fa-chevron-down sidebar-item-arrow"
               [ngClass]="{ rotated: item.isOpen }"
             ></i>
             }
           </a>
-          @if(item.children && !isSidebarCollapsed && item.isOpen) {
+          @if(item.children && !isSidebarCollapsed() && item.isOpen) {
           <ul class="sidebar-submenu" [@submenuAnimation]>
             <li *ngFor="let child of item.children">
               <a
                 class="sidebar-item sidebar-subitem"
                 [routerLink]="child.route"
+                routerLinkActive="active-link"
               >
                 <mat-icon class="child-icon">{{ child.icon }}</mat-icon>
                 <span class="sidebar-item-text">{{ child.label }}</span>

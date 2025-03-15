@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 
 @Component({
@@ -10,10 +10,13 @@ import { MaterialModule } from '../../material.module';
 export class HeadingComponent implements OnInit {
   @Input() title = '';
   @Input() refreshIcon: boolean = false;
+  @Output() refresh: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {}
 
   ngOnInit() {}
 
-  public refresh(): void {}
+  public handleRefresh(): void {
+    this.refresh.emit(true);
+  }
 }

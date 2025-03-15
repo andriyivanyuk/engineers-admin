@@ -9,7 +9,9 @@ import { RegisterComponent } from './pages/authentication/register/register.comp
 import { AuthGuard } from './pages/authentication/guards/auth.guard';
 import { NotFoundComponent } from './pages/authentication/not-found/not-found.component';
 import { ProductListComponent } from './pages/products/product-list/product-list.component';
-import { SuperAdminComponent } from './pages/super-admin/super-admin.component';
+import { CreateCodeComponent } from './pages/super-admin/create-code/create-code.component';
+import { CodeListComponent } from './pages/super-admin/code-list/code-list.component';
+import { RoleGuard } from './guards/role.guard';
 
 export const routes: Routes = [
   {
@@ -33,12 +35,13 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'create-product', component: CreateProductComponent },
       { path: 'product-list', component: ProductListComponent },
-      { path: 'superadmin', component: SuperAdminComponent },
+      { path: 'create-code', component: CreateCodeComponent },
+      { path: 'code-list', component: CodeListComponent },
     ],
   },
   {

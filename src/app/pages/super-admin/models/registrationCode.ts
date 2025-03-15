@@ -1,3 +1,7 @@
+export interface RegistrationCodeResponse {
+  codes: RegistrationCode[];
+}
+
 export interface RegistrationCode {
   code: string;
   is_used: boolean;

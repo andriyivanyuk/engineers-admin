@@ -4,12 +4,17 @@ export const menuItems: MenuItem[] = [
   {
     icon: 'admin_panel_settings',
     label: 'Управління доступом',
-    isOpen: false,
+    isOpen: true,
     children: [
       {
         icon: 'code',
         label: 'Генерувати код',
-        route: 'superadmin',
+        route: 'create-code',
+      },
+      {
+        icon: 'list',
+        label: 'Список кодів',
+        route: 'code-list',
       },
     ],
   },
