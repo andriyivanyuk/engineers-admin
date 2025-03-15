@@ -45,8 +45,17 @@
   justify-content: space-between;
   align-items: center;
 
+  span {
+    color: vars.$main-color;
+  }
+
+  mat-icon {
+    font-size: 19px;
+    color: vars.$main-color;
+  }
+
   .link-label {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     color: vars.$main-color;
   }

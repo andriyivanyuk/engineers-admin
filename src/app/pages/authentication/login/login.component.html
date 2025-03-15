@@ -1,61 +1,58 @@
 <div class="login-wrapper">
   <form [formGroup]="form" class="main-form">
-    <div class="card">
-      <div class="card-body">
-        <h3 class="card-title">Ввійти</h3>
+    <h3 class="card-title">Ввійти</h3>
 
-        <div class="card-content">
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input
-              type="email"
-              formControlName="email"
-              matInput
-              placeholder="Введіть email"
-            />
+    <div class="card-content">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          formControlName="email"
+          matInput
+          placeholder="Введіть email"
+        />
 
-            @if(form.get('email')?.touched &&
-            form.get('email')?.hasError('required')) {
-            <mat-error>Email не може бути пустим</mat-error>
-            } @if(form.get('email')?.touched &&
-            form.get('email')?.hasError('email')) {
-            <mat-error>Будь ласка введіть валідний email</mat-error>
-            }
-          </mat-form-field>
+        @if(form.get('email')?.touched &&
+        form.get('email')?.hasError('required')) {
+        <mat-error>Email не може бути пустим</mat-error>
+        } @if(form.get('email')?.touched &&
+        form.get('email')?.hasError('email')) {
+        <mat-error>Будь ласка введіть валідний email</mat-error>
+        }
+      </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Пароль</mat-label>
-            <input
-              matInput
-              placeholder="Введіть пароль"
-              formControlName="password"
-            />
+      <mat-form-field appearance="fill">
+        <mat-label>Пароль</mat-label>
+        <input
+          matInput
+          placeholder="Введіть пароль"
+          formControlName="password"
+        />
 
-            @if(form.get('password')?.touched &&
-            form.get('password')?.hasError('required')) {
-            <mat-error>Пароль не може бути пустим.</mat-error>
-            } @if(form.get('password')?.touched &&
-            form.get('password')?.hasError('minlength')) {
-            <mat-error>Пароль має містити щонайменше 4 символа</mat-error>
-            }
-          </mat-form-field>
-          <div class="form-group">
-            <div class="additional-account">
-              <span class="link-label">Немає акаунта?</span>
-              <a class="link" routerLink="/authentication/register"
-                >Створити акаунт</a
-              >
-            </div>
-          </div>
-          <button
-            [disabled]="form.invalid"
-            class="primary-button"
-            (click)="signIn()"
-          >
-            Ввійти
+        @if(form.get('password')?.touched &&
+        form.get('password')?.hasError('required')) {
+        <mat-error>Пароль не може бути пустим.</mat-error>
+        } @if(form.get('password')?.touched &&
+        form.get('password')?.hasError('minlength')) {
+        <mat-error>Пароль має містити щонайменше 4 символа</mat-error>
+        }
+      </mat-form-field>
+      <div class="form-group">
+        <div class="additional-account">
+          <span class="link-label">Немає акаунта?</span>
+          <button mat-button routerLink="/authentication/register">
+            <mat-icon>person_add</mat-icon>
+            <span> Створити акаунт</span>
           </button>
         </div>
       </div>
+      <button
+        [disabled]="form.invalid"
+        class="primary-button"
+        (click)="signIn()"
+      >
+        Ввійти
+      </button>
     </div>
   </form>
 </div>

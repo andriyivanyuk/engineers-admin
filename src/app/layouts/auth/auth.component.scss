@@ -1,3 +1,5 @@
+@use "../../../../public/assets/scss/variables" as vars;
+
 .auth-layout {
-  background-color: #e2e8f0;
+  background-color: vars.$white-color;
 }
