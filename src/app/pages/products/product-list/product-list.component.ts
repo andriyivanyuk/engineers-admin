@@ -64,13 +64,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   readonly productService = inject(ProductService);
 
-  public createForm() {
+  public createForm(): void {
     this.form = this.fb.group({
       title: [''],
     });
   }
 
-  public handleSearchByTitle() {
+  public handleSearchByTitle(): void {
     this.form.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((value) => {
@@ -83,6 +83,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   public getProducts(value: string = ''): void {
+    this.loader.start();
     const subscription = this.productService
       .getProducts(this.page, this.limit, value)
       .pipe(
@@ -115,10 +116,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.getProducts();
   }
 
+  public handleRefresh(): void {
+    this.getProducts();
+  }
+
   ngOnInit() {
     this.createForm();
     this.handleSearchByTitle();
-    this.loader.start();
     this.getProducts();
   }
 

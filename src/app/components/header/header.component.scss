@@ -1,3 +1,5 @@
+@use "../../../assets/scss/variables" as vars;
+
 .example-spacer {
   flex: 1 1 auto;
 }
@@ -13,6 +15,13 @@
     background-color: #ffffff;
     margin: 0 auto;
     border-bottom: 2px solid #e2e8f0;
+
+    .admin-title {
+      font-size: 16px;
+      color: vars.$main-color;
+      font-weight: 500;
+      cursor: pointer;
+    }
   }
 
   &-expanded {

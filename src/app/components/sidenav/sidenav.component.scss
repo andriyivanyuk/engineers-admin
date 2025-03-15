@@ -1,4 +1,4 @@
-@use "../../../../public/assets/scss/variables" as vars;
+@use "../../../assets/scss/variables" as vars;
 
 .sidebar {
   background-color: vars.$main-color;
@@ -22,8 +22,7 @@
   position: relative;
 
   .logo-img {
-    width: 100%;
-    max-width: 150px;
+    width: 150px;
   }
 }
 
@@ -91,7 +90,7 @@
   }
 
   &-text {
-    font-size: 13px;
+    font-size: 14px;
     white-space: nowrap;
     transition: opacity 0.3s ease, max-width 0.3s ease;
     max-width: 100%;
@@ -106,6 +105,10 @@
 .sidebar-submenu {
   .sidebar-item {
     padding-left: 25px;
+
+    &-text {
+      font-size: 13px;
+    }
   }
 }
 

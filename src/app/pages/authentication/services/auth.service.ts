@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { LoginResponse } from '../models/loginResponse';
 import { LoginRequest } from '../models/loginRequest';
 import { RegisterResponse } from '../models/registerResponse';
-import { User } from '../models/user';
+import { AccountRequest } from '../models/accountRequest';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +16,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, request);
   }
 
-  public register(user: User): Observable<RegisterResponse> {
+  public register(user: AccountRequest): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, user);
   }
 

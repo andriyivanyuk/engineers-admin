@@ -74,9 +74,9 @@ export class SidenavComponent implements OnInit {
     const user = this.tokenStorage.getUserSession();
     let result;
     if (user.role === 'superadmin') {
-      result = menuItems.filter((item) => item.label === 'Управління доступом');
+      result = menuItems.filter((item) => item.label === 'Доступ');
     } else {
-      result = menuItems.filter((item) => item.label !== 'Управління доступом');
+      result = menuItems.filter((item) => item.label !== 'Доступ');
     }
     if (result) {
       this.menuItems = result;

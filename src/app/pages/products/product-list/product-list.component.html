@@ -1,5 +1,9 @@
 <div>
-  <app-heading [title]="title" [refreshIcon]="true"></app-heading>
+  <app-heading
+    [title]="title"
+    [refreshIcon]="true"
+    (refresh)="handleRefresh()"
+  ></app-heading>
   <form [formGroup]="form">
     <mat-form-field appearance="fill">
       <mat-label>Пошук по назві</mat-label>

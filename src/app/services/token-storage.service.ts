@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoginResponse } from '../pages/authentication/models/loginResponse';
+import { User } from '../pages/authentication/models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -41,9 +42,9 @@ export class TokenStorageService {
     }
   }
 
-  public getUserSession(): any {
+  public getUserSession(): User {
     const userData = sessionStorage.getItem(this.userData);
-    return userData ? JSON.parse(userData) : null;
+    return JSON.parse(userData ? userData : '');
   }
 
   private setStorageItem(key: string, value: string): void {

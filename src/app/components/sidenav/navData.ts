@@ -3,7 +3,7 @@ import { MenuItem } from './menuItem';
 export const menuItems: MenuItem[] = [
   {
     icon: 'admin_panel_settings',
-    label: 'Управління доступом',
+    label: 'Доступ',
     isOpen: true,
     children: [
       {
@@ -12,7 +12,7 @@ export const menuItems: MenuItem[] = [
         route: 'create-code',
       },
       {
-        icon: 'list',
+        icon: 'format_list_bulleted',
         label: 'Список кодів',
         route: 'code-list',
       },
@@ -25,35 +25,35 @@ export const menuItems: MenuItem[] = [
   },
   {
     icon: 'sell',
-    label: 'Управління продуктами',
+    label: 'Продукти',
     isOpen: false,
     children: [
       {
-        icon: 'list',
+        icon: 'format_list_bulleted',
         label: 'Список продуктів',
         route: 'product-list',
       },
       {
         icon: 'add_circle',
-        label: 'Створити',
+        label: 'Створити продукт',
         route: 'create-product',
       },
     ],
   },
   {
     icon: 'category',
-    label: 'Manage categories',
+    label: 'Категорії',
     isOpen: false,
     children: [
       {
-        icon: 'list',
-        label: 'Category list',
-        route: '',
+        icon: 'format_list_bulleted',
+        label: 'Список категорій',
+        route: 'test',
       },
       {
         icon: 'add_circle',
-        label: 'Add category',
-        route: 'create-product',
+        label: 'Створити категорію',
+        route: 'test',
       },
     ],
   },
