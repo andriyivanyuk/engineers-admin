@@ -1,9 +1,9 @@
-export interface ProductAttribute {
-  key?: string;
-  values?: AttributeValue[];
-}
+// export interface ProductAttribute {
+//   key?: string;
+//   values?: AttributeValue[];
+// }
 
-export interface AttributeValue {
-  value: string;
-  value_id: number;
-}
+// export interface AttributeValue {
+//   value: string;
+//   value_id: number;
+// }

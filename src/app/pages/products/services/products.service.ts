@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { CreateProductResponse } from '../models/createProductResponse';
 import { ProductListResponse } from '../models/productListResponse';
 import { ViewProduct } from '../models/viewProduct';
-import { DetailsProductResponse } from '../models/UpdatedProductResponse';
+import { DetailsProductResponse } from '../models/updatedProductResponse';
 
 @Injectable()
 export class ProductService {

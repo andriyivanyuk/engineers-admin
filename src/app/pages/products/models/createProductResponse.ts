@@ -1,3 +1,5 @@
+// import { ProductImage } from './productImage';
+
 import { ProductImage } from './productImage';
 
 export interface CreateProductResponse {

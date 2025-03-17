@@ -20,9 +20,13 @@ import { ProductService } from '../services/products.service';
 import { minImageCountValidator } from '../validators/min-image-count.validator';
 import { AttributeDialogComponent } from '../dialogs/attribute-dialog/attribute-dialog.component';
 import { CommonModule } from '@angular/common';
-import { AttributeValue, DynamicAttribute } from '../models/attribute';
+import {
+  AttributeValue,
+  DynamicAttribute,
+} from '../models/form-type/attribute';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DetailsProductResponse } from '../models/UpdatedProductResponse';
+import { DetailsProductResponse } from '../models/updatedProductResponse';
+import { AttributesFormType } from '../models/form-type/attributes-type';
 
 @Component({
   selector: 'app-edit-product',
@@ -111,9 +115,10 @@ export class EditProductComponent implements OnInit {
       control.patchValue({ isPrimary: i === index });
     });
 
-    this.selectedImageId = image.value.imageId;
-
-    this.updateSelectedImageName(index);
+    if (image) {
+      this.selectedImageId = image.value.imageId;
+      this.updateSelectedImageName(index);
+    }
   }
 
   private updateSelectedImageName(index: number) {
@@ -269,16 +274,11 @@ export class EditProductComponent implements OnInit {
     }
   }
 
-  public setAttributes(attributes: any[]): void {
-    console.log(attributes);
+  public setAttributes(attributes: AttributesFormType[]): void {
     if (attributes?.length) {
       attributes.forEach((attr) => {
         if (attr?.values?.length) {
-          const mapped = attr.values.map((item: any) => {
-            console.log('ITEM', item);
-            return item.value;
-          });
-          console.log(mapped);
+          const mapped = attr.values.map((item) => item.value);
           this.addAttributeControl(attr.key, mapped);
         }
       });
@@ -316,6 +316,10 @@ export class EditProductComponent implements OnInit {
       } else {
         primaryIndex = restoreIndex;
       }
+      console.log(
+        this.images.at(primaryIndex),
+        this.images.at(primaryIndex).value
+      );
       this.setPrimaryImage(primaryIndex, this.images.at(primaryIndex));
     }
     this.form.updateValueAndValidity();
@@ -387,7 +391,6 @@ export class EditProductComponent implements OnInit {
           this.selectedImageId = 0;
 
           this.prefillForm(result);
-          console.log(this.form.status, this.form);
           this.snackBar.open('Продукт оновлено', 'Закрити', {
             duration: 3000,
           });
