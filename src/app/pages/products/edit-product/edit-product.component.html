@@ -1,6 +1,6 @@
 <div>
   <app-heading [title]="title"></app-heading>
-  <form class="create-form" [formGroup]="form">
+  <form class="edit-form" [formGroup]="form">
     <div class="field-group">
       <mat-form-field appearance="fill">
         <mat-label>Назва</mat-label>
@@ -105,7 +105,7 @@
                 </mat-form-field>
 
                 <button
-                  matTooltip="Remove title"
+                  matTooltip="Видалити заголовок"
                   class="attr-btn"
                   mat-icon-button
                   (click)="deleteAttributeControl(index)"
@@ -121,7 +121,7 @@
               <ng-container>
                 <div [formGroup]="valueForm" class="attribute-label">
                   <mat-label class="attribute-label-title"
-                    >Значення атрибута #{{ j + 1 }}
+                    >Значення #{{ j + 1 }}
                   </mat-label>
                   <div class="attribute-item">
                     <mat-form-field appearance="outline">
@@ -133,7 +133,7 @@
                     </mat-form-field>
 
                     <button
-                      matTooltip="Remove value"
+                      matTooltip="Видалити значення"
                       class="attr-btn"
                       mat-icon-button
                       (click)="deleteAttributeValue(index, j)"
@@ -161,26 +161,26 @@
       <mat-label class="label-title">Зображення</mat-label>
       <input type="file" (change)="onFileSelect($event)" multiple />
       @for(image of images.controls; track image; let index = $index) {
-      @if(imageActive) {
+
       <div formArrayName="images">
         <div [formGroupName]="index" class="img-upload">
           <img
             [src]="image.get('path')!.value"
             [class.selected-image]="index === form.get('primary')!.value"
             style="width: 100px; height: auto"
-            (click)="setPrimaryImage(index)"
+            (click)="setPrimaryImage(index, image)"
           />
 
           <button
             mat-icon-button
-            matTooltip="Remove image"
-            (click)="deleteImage(index)"
+            matTooltip="Видалити зображення"
+            (click)="deleteImage(index, image)"
           >
             <mat-icon>delete</mat-icon>
           </button>
         </div>
       </div>
-      } }
+      }
 
       <div class="main-img">
         Головне зображення: {{ selectedImageName | async }}
@@ -193,12 +193,12 @@
       <button
         [disabled]="!form.valid"
         class="primary-button"
-        (click)="createProduct()"
+        (click)="updateProduct()"
       >
-        Створити
+        Оновити
       </button>
-      <button type="button" mat-stroked-button (click)="clear()">
-        Очистити
+      <button type="button" mat-stroked-button (click)="backToProducts()">
+        До продуктів
       </button>
     </div>
   </form>

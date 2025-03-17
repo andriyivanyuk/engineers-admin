@@ -12,6 +12,7 @@ import { ProductListComponent } from './pages/products/product-list/product-list
 import { CreateCodeComponent } from './pages/super-admin/create-code/create-code.component';
 import { CodeListComponent } from './pages/super-admin/code-list/code-list.component';
 import { RoleGuard } from './guards/role.guard';
+import { EditProductComponent } from './pages/products/edit-product/edit-product.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'create-product', component: CreateProductComponent },
+      {
+        path: 'edit-product/:id',
+        component: EditProductComponent,
+      },
       { path: 'product-list', component: ProductListComponent },
       { path: 'create-code', component: CreateCodeComponent },
       { path: 'code-list', component: CodeListComponent },

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CreateProductResponse } from '../models/createProductResponse';
 import { ProductListResponse } from '../models/productListResponse';
 import { ViewProduct } from '../models/viewProduct';
+import { DetailsProductResponse } from '../models/UpdatedProductResponse';
 
 @Injectable()
 export class ProductService {
@@ -38,8 +39,10 @@ export class ProductService {
     });
   }
 
-  public getProductById(productId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/product/${productId}`);
+  public getProductById(productId: number): Observable<DetailsProductResponse> {
+    return this.http.get<DetailsProductResponse>(
+      `${this.apiUrl}/product/${productId}`
+    );
   }
 
   public addProduct(product: FormData): Observable<CreateProductResponse> {
@@ -49,8 +52,14 @@ export class ProductService {
     );
   }
 
-  public updateProduct(productId: number, product: FormData): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/product/${productId}`, product);
+  public updateProduct(
+    productId: number,
+    product: FormData
+  ): Observable<DetailsProductResponse> {
+    return this.http.put<DetailsProductResponse>(
+      `${this.apiUrl}/product/${productId}`,
+      product
+    );
   }
 
   public deleteProduct(productId: number): Observable<{ message: string }> {

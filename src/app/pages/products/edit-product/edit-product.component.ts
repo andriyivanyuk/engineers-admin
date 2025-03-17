@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MaterialModule } from '../../../material.module';
 import { HeadingComponent } from '../../../components/heading/heading.component';
-import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import {
   FormArray,
   FormBuilder,
@@ -21,11 +21,13 @@ import { minImageCountValidator } from '../validators/min-image-count.validator'
 import { AttributeDialogComponent } from '../dialogs/attribute-dialog/attribute-dialog.component';
 import { CommonModule } from '@angular/common';
 import { AttributeValue, DynamicAttribute } from '../models/attribute';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DetailsProductResponse } from '../models/UpdatedProductResponse';
 
 @Component({
-  selector: 'app-create-product',
-  templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.scss'],
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.scss'],
   imports: [
     MaterialModule,
     HeadingComponent,
@@ -34,14 +36,12 @@ import { AttributeValue, DynamicAttribute } from '../models/attribute';
   ],
   providers: [ProductStatusService, CategoryService, ProductService],
 })
-export class CreateProductComponent implements OnInit {
-  title: string = 'Створити продукт';
+export class EditProductComponent implements OnInit {
+  title: string = 'Редагувати продукт';
 
-  private destroy$ = new Subject<void>();
   attributeForms: FormGroup[][] = [];
 
   form!: FormGroup;
-  imageActive: boolean = true;
 
   statuses$!: Observable<ProductStatus[]>;
   categories$!: Observable<Category[]>;
@@ -55,6 +55,12 @@ export class CreateProductComponent implements OnInit {
   readonly categoryService = inject(CategoryService);
   readonly productService = inject(ProductService);
 
+  readonly route = inject(ActivatedRoute);
+  readonly router = inject(Router);
+
+  selectedImageId: number = 0;
+  imageIds: number[] = [];
+
   selectedImageName: BehaviorSubject<string> = new BehaviorSubject<string>(
     'не обрано'
   );
@@ -63,11 +69,14 @@ export class CreateProductComponent implements OnInit {
     this.statuses$ = this.productStatusService.statuses$;
     this.categories$ = this.categoryService.getCategories();
     this.createForm();
-    this.prefillForm();
+
+    const productId = this.route.snapshot.paramMap.get('id')!;
+    this.getProductById(+productId);
   }
 
   public createForm() {
     this.form = this.fb.group({
+      product_id: [0],
       title: ['', [Validators.required, Validators.maxLength(255)]],
       description: [''],
       price: [null, [Validators.required]],
@@ -84,8 +93,26 @@ export class CreateProductComponent implements OnInit {
     return this.form.get('images') as FormArray;
   }
 
-  public setPrimaryImage(index: number): void {
+  get attributes(): FormArray {
+    return this.form.get('attributes') as FormArray;
+  }
+
+  get attributeFormGroups(): FormGroup[] {
+    return this.attributes.controls as FormGroup[];
+  }
+
+  public backToProducts() {
+    this.router.navigate(['/admin/product-list']);
+  }
+
+  public setPrimaryImage(index: number, image?: any): void {
     this.form.patchValue({ primary: index });
+    this.images.controls.forEach((control, i) => {
+      control.patchValue({ isPrimary: i === index });
+    });
+
+    this.selectedImageId = image.value.imageId;
+
     this.updateSelectedImageName(index);
   }
 
@@ -111,12 +138,9 @@ export class CreateProductComponent implements OnInit {
     }));
   }
 
-  get attributes(): FormArray {
-    return this.form.get('attributes') as FormArray;
-  }
-
   public addAttributeControl(key: string, attributes: string[]) {
     const attributeForm = this.fb.group({
+      attribute_id: [],
       title: [key, Validators.required],
       attributeValues: this.fb.array([]),
     });
@@ -128,6 +152,7 @@ export class CreateProductComponent implements OnInit {
 
     attributes.forEach((attr) => {
       const valueForm = this.fb.group({
+        value_id: [],
         attributeValueTitle: [attr, Validators.required],
       });
       attributeValuesArray.push(valueForm);
@@ -135,10 +160,6 @@ export class CreateProductComponent implements OnInit {
     });
 
     this.attributes.push(attributeForm);
-  }
-
-  get attributeFormGroups(): FormGroup[] {
-    return this.attributes.controls as FormGroup[];
   }
 
   public deleteAttributeControl(index: number) {
@@ -156,6 +177,9 @@ export class CreateProductComponent implements OnInit {
     if (attributeValues && attributeValues.length > valueIndex) {
       attributeValues.removeAt(valueIndex);
       this.attributeForms[attributeIndex].splice(valueIndex, 1);
+    }
+    if (valueIndex === 0) {
+      this.deleteAttributeControl(attributeIndex);
     }
   }
 
@@ -213,48 +237,128 @@ export class CreateProductComponent implements OnInit {
     }
   }
 
-  public deleteImage(index: number) {
+  public deleteImage(index: number, image: any) {
     this.images.removeAt(index);
+
     if (this.images.length === 0) {
-      this.selectedImageName.next('Будь ласка, оберіть головне фото');
       this.form.patchValue({ primary: index });
+      this.selectedImageName.next('Будь ласка, оберіть головне фото');
     } else if (this.form.value.primary >= this.images.length) {
       this.updateSelectedImageName(this.images.length - 1);
     }
+
+    if (!!image.value.imageId) {
+      this.imageIds.push(image.value.imageId);
+    }
   }
 
-  public prefillForm() {
-    this.statuses$.pipe(takeUntil(this.destroy$)).subscribe({
-      next: (result) => {
-        const status = result.find((status) => status.status_id);
-        if (status) {
-          this.form.controls['status_id'].reset(status.status_id);
-        }
-      },
-    });
-    this.categories$.pipe(takeUntil(this.destroy$)).subscribe({
-      next: (result) => {
-        const category = result.find((category) => category.category_id);
-        if (category) {
-          this.form.controls['category_id'].reset(category.category_id);
-        }
-      },
-    });
+  public setImages(images: any[]): void {
+    const imagesFormArray = this.images as FormArray;
+    if (images?.length) {
+      images.forEach((image) => {
+        const fullPath = `http://localhost:5500/${image.image_path}`;
+        imagesFormArray.push(
+          this.fb.group({
+            file: [image.file],
+            path: [fullPath],
+            isPrimary: [image.isPrimary],
+            imageId: [image.image_id],
+          })
+        );
+      });
+    }
   }
 
-  public createProduct() {
+  public setAttributes(attributes: any[]): void {
+    console.log(attributes);
+    if (attributes?.length) {
+      attributes.forEach((attr) => {
+        if (attr?.values?.length) {
+          const mapped = attr.values.map((item: any) => {
+            console.log('ITEM', item);
+            return item.value;
+          });
+          console.log(mapped);
+          this.addAttributeControl(attr.key, mapped);
+        }
+      });
+    }
+  }
+
+  public prefillForm(result: DetailsProductResponse) {
+    this.images.clear();
+    this.attributes.clear();
+
+    this.form.controls['title'].reset(result.product.title);
+    this.form.controls['price'].reset(result.product.price);
+    this.form.controls['stock'].reset(result.product.stock);
+    this.form.controls['status_id'].reset(result.product.status_id);
+    this.form.controls['category_id'].reset(result.product.category_id);
+    this.form.controls['product_id'].reset(result.product.product_id);
+    if (!!result.product.attributes?.length) {
+      this.setAttributes(result.product.attributes);
+    }
+    if (!!result.product.images?.length) {
+      this.setImages(result.product?.images);
+
+      let primaryIndex: number;
+
+      const index = result.product.images.findIndex(
+        (image) => image.is_primary === true
+      );
+
+      const restoreIndex = result.product.images.findIndex(
+        (item) => item.image_id
+      );
+
+      if (index !== -1) {
+        primaryIndex = index;
+      } else {
+        primaryIndex = restoreIndex;
+      }
+      this.setPrimaryImage(primaryIndex, this.images.at(primaryIndex));
+    }
+    this.form.updateValueAndValidity();
+  }
+
+  public getProductById(id: number) {
+    this.loader.start();
+    if (id) {
+      this.productService.getProductById(id).subscribe({
+        next: (result) => {
+          this.prefillForm(result);
+          this.loader.stop();
+        },
+        error: (error) => {
+          this.loader.stop();
+          console.error(error);
+        },
+      });
+    }
+  }
+
+  public updateProduct() {
     if (!this.form.valid) {
       return;
     }
     this.loader.start();
     const formData = new FormData();
 
+    formData.append('product_id', this.form.get('product_id')?.value);
     formData.append('title', this.form.get('title')?.value);
     formData.append('description', this.form.get('description')?.value);
     formData.append('price', this.form.get('price')?.value);
     formData.append('stock', this.form.get('stock')?.value);
     formData.append('category_id', this.form.get('category_id')?.value);
     formData.append('status_id', this.form.get('status_id')?.value);
+    formData.append('deleteImageIds', JSON.stringify(this.imageIds));
+
+    formData.append('selectedImageId', JSON.stringify(this.selectedImageId));
+
+    const attributes = this.mapValuesAttributes(this.attributes.value);
+    if (!!attributes?.length) {
+      formData.append('attributes', JSON.stringify(attributes));
+    }
 
     const images = this.images.controls;
     images.forEach((imageControl, index) => {
@@ -262,30 +366,36 @@ export class CreateProductComponent implements OnInit {
       if (file) {
         formData.append('images', file, file.name);
       }
-
-      if (index.toString() === this.form.get('primary')!.value.toString()) {
-        formData.append('primary', index.toString());
-      }
     });
 
-    const attributes = this.mapValuesAttributes(this.attributes.value);
-    if (!!attributes?.length) {
-      formData.append('attributes', JSON.stringify(attributes));
-    }
+    this.productService
+      .updateProduct(this.form.value.product_id, formData)
+      .pipe(
+        catchError((error) => {
+          this.loader.stop();
+          this.snackBar.open('Помилка при оновленні продукту', 'Закрити', {
+            duration: 3000,
+          });
+          console.error('Помилка при оновленні продукту:', error);
+          return throwError(() => error);
+        })
+      )
+      .subscribe({
+        next: (result) => {
+          this.loader.stop();
+          this.imageIds = [];
+          this.selectedImageId = 0;
 
-    this.productService.addProduct(formData).subscribe({
-      next: () => {
-        this.imageActive = false;
-        this.form.reset();
-        this.loader.stop();
-        this.snackBar.open('Продукт створено', 'Закрити', {
-          duration: 3000,
-        });
-      },
-      error: (error) => {
-        this.loader.stop();
-        console.error('Помилка при додаванні продукту:', error);
-      },
-    });
+          this.prefillForm(result);
+          console.log(this.form.status, this.form);
+          this.snackBar.open('Продукт оновлено', 'Закрити', {
+            duration: 3000,
+          });
+        },
+        error: (error) => {
+          this.loader.stop();
+          console.error('Помилка при оновлені продукту:', error);
+        },
+      });
   }
 }

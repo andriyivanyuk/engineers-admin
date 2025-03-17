@@ -82,8 +82,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
       });
   }
 
+  public editProduct(id: number) {
+    this.router.navigate(['/admin/edit-product', id]);
+  }
+
   public getProducts(value: string = ''): void {
-    this.loader.start();
     const subscription = this.productService
       .getProducts(this.page, this.limit, value)
       .pipe(
@@ -121,6 +124,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.loader.start();
     this.createForm();
     this.handleSearchByTitle();
     this.getProducts();
