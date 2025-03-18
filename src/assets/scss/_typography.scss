@@ -1,0 +1,14 @@
+@use "../scss/variables" as vars;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+mat-dialog-content {
+  color: vars.$main-color !important;
+}
+
+mat-dialog-actions span {
+  color: vars.$main-color !important;
+}

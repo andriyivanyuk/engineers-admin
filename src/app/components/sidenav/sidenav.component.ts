@@ -8,7 +8,6 @@ import { MaterialModule } from '../../material.module';
 import { TokenStorageService } from '../../services/token-storage.service';
 import { MenuItem } from './menuItem';
 import { menuItems } from './navData';
-// import { DeleteProductComponent } from '../dialogs/delete-product/delete-product.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -51,20 +50,6 @@ export class SidenavComponent implements OnInit {
   readonly animal = signal('');
   readonly name = model('');
   readonly dialog = inject(MatDialog);
-
-  // public openDialog(): void {
-  //   const dialogRef = this.dialog.open(DeleteProductComponent, {
-  //     data: { name: this.name(), animal: this.animal() },
-  //     width: '450px',
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     console.log('The dialog was closed');
-  //     if (result !== undefined) {
-  //       this.animal.set(result);
-  //     }
-  //   });
-  // }
 
   ngOnInit(): void {
     this.mapMenuItems();

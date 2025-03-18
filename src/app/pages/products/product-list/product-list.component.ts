@@ -14,9 +14,12 @@ import {
   catchError,
   debounceTime,
   distinctUntilChanged,
+  of,
   Subscription,
+  switchMap,
 } from 'rxjs';
 import { ViewProduct } from '../models/viewProduct';
+import { DeleteDialogComponent } from '../../../components/dialogs/delete/delete-dialog.component';
 
 @Component({
   selector: 'app-product-list',
@@ -38,6 +41,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [
     'title',
+    'code',
     'amount',
     'status',
     'price',
@@ -120,7 +124,45 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   public handleRefresh(): void {
+    this.loader.start();
     this.getProducts();
+  }
+
+  public openDeleteDialog(id: number): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '600px',
+    });
+
+    const dialogSubscription = dialogRef
+      .afterClosed()
+      .pipe(
+        switchMap((result) => {
+          if (result) {
+            this.loader.start();
+            return this.productService.deleteProduct(id);
+          }
+          return of(null);
+        })
+      )
+      .subscribe({
+        next: (result) => {
+          if (result) {
+            this.loader.stop();
+            this.getProducts();
+            this.snackBar.open(result.message, 'Закрити', {
+              duration: 3000,
+            });
+          }
+        },
+        error: (error) => {
+          this.loader.stop();
+          this.snackBar.open(error.error.message, 'Закрити', {
+            duration: 5000,
+          });
+        },
+      });
+
+    this.subscriptions.add(dialogSubscription);
   }
 
   ngOnInit() {

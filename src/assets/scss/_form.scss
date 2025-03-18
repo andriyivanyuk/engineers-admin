@@ -1,0 +1,11 @@
+@use "../scss/variables" as vars;
+
+form {
+  color: vars.$main-color !important;
+
+  mat-icon,
+  input,
+  mat-select {
+    color: vars.$main-color !important;
+  }
+}

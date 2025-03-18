@@ -89,8 +89,8 @@
           <span for="attrAdd">Додати атрибут</span>
         </div>
 
-        @for (attributeForm of attributeFormGroups; track attributeForm; let
-        index = $index) {
+        @for (attributeForm of attributeFormGroups; track attributeForm.value;
+        let index = $index) {
         <ng-container>
           <div class="attribute-row" [formGroup]="attributeForm">
             <div class="attribute-label">
@@ -160,7 +160,7 @@
     <div class="images-wrapper">
       <mat-label class="label-title">Зображення</mat-label>
       <input type="file" (change)="onFileSelect($event)" multiple />
-      @for(image of images.controls; track image; let index = $index) {
+      @for(image of images.controls; track image.value; let index = $index) {
 
       <div formArrayName="images">
         <div [formGroupName]="index" class="img-upload">

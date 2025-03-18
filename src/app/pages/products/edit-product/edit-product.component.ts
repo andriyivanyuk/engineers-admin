@@ -183,7 +183,7 @@ export class EditProductComponent implements OnInit {
       attributeValues.removeAt(valueIndex);
       this.attributeForms[attributeIndex].splice(valueIndex, 1);
     }
-    if (valueIndex === 0) {
+    if (attributeValues.length === 0) {
       this.deleteAttributeControl(attributeIndex);
     }
   }
@@ -316,10 +316,6 @@ export class EditProductComponent implements OnInit {
       } else {
         primaryIndex = restoreIndex;
       }
-      console.log(
-        this.images.at(primaryIndex),
-        this.images.at(primaryIndex).value
-      );
       this.setPrimaryImage(primaryIndex, this.images.at(primaryIndex));
     }
     this.form.updateValueAndValidity();
