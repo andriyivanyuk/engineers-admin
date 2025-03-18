@@ -48,12 +48,12 @@ export const menuItems: MenuItem[] = [
       {
         icon: 'format_list_bulleted',
         label: 'Список категорій',
-        route: 'test',
+        route: 'category-list',
       },
       {
         icon: 'add_circle',
         label: 'Створити категорію',
-        route: 'test',
+        route: 'create-category',
       },
     ],
   },

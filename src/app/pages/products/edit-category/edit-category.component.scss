@@ -1,0 +1,94 @@
+@use "../../../../assets/scss/variables" as vars;
+
+.create-form {
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+  }
+}
+
+.label-title {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.attribute-add,
+.value-add {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  column-gap: 5px;
+
+  span {
+    cursor: pointer;
+    font-weight: 500;
+  }
+}
+
+.attribute-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 5px;
+
+  &-title {
+    font-weight: 500;
+  }
+
+  .attribute-item {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 100px;
+
+    .attr-btn {
+      margin-top: 7px;
+    }
+  }
+}
+
+.file-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+
+  &-title {
+    font-weight: 600;
+  }
+}
+
+.btn-group {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.images-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.empty-img-error {
+  color: #d32f2f;
+}
+
+.main-img {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.selected-image {
+  border: 2px solid vars.$main-color;
+  padding: 2px;
+  border-radius: 8px;
+}
+
+.img-upload {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: space-between;
+}

@@ -13,6 +13,9 @@ import { CreateCodeComponent } from './pages/super-admin/create-code/create-code
 import { CodeListComponent } from './pages/super-admin/code-list/code-list.component';
 import { RoleGuard } from './guards/role.guard';
 import { EditProductComponent } from './pages/products/edit-product/edit-product.component';
+import { CreateCategoryComponent } from './pages/products/create-category/create-category.component';
+import { CategoryListComponent } from './pages/products/category-list/category-list.component';
+import { EditCategoryComponent } from './pages/products/edit-category/edit-category.component';
 
 export const routes: Routes = [
   {
@@ -40,10 +43,18 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'create-product', component: CreateProductComponent },
+      { path: 'create-category', component: CreateCategoryComponent },
+      { path: 'category-list', component: CategoryListComponent },
+
       {
         path: 'edit-product/:id',
         component: EditProductComponent,
       },
+      {
+        path: 'edit-category/:id',
+        component: EditCategoryComponent,
+      },
+
       { path: 'product-list', component: ProductListComponent },
       { path: 'create-code', component: CreateCodeComponent },
       { path: 'code-list', component: CodeListComponent },

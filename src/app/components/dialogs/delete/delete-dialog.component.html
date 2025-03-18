@@ -1,6 +1,6 @@
 <div class="dialog-wrapper">
-  <h3 mat-dialog-title>Видалити продукт</h3>
-  <mat-dialog-content>Ви хотіли б видалити продукт?</mat-dialog-content>
+  <h3 mat-dialog-title>{{ deleteTitle }}</h3>
+  <mat-dialog-content>{{ deleteContent }}</mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button mat-dialog-close (click)="close()">Ні</button>
     <button mat-button mat-dialog-close (click)="delete()">Так</button>

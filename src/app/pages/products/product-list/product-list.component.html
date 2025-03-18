@@ -17,9 +17,9 @@
   </div>
   } @if(isLoaded) {
   <div>
-    <table mat-table [dataSource]="dataSource" matSort class="product-table">
+    <table mat-table [dataSource]="dataSource" class="product-table">
       <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Назва</th>
+        <th mat-header-cell *matHeaderCellDef>Назва</th>
         <td mat-cell *matCellDef="let row">
           <div class="image-path">
             <img
@@ -34,22 +34,22 @@
       </ng-container>
 
       <ng-container matColumnDef="code">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Код</th>
+        <th mat-header-cell *matHeaderCellDef>Код</th>
         <td mat-cell *matCellDef="let row">{{ row.product_code }}</td>
       </ng-container>
 
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Кількість, шт</th>
+        <th mat-header-cell *matHeaderCellDef>Кількість, шт</th>
         <td mat-cell *matCellDef="let row">{{ row.stock }}</td>
       </ng-container>
 
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Статус</th>
+        <th mat-header-cell *matHeaderCellDef>Статус</th>
         <td mat-cell *matCellDef="let row">{{ row.status }}</td>
       </ng-container>
 
       <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ціна, грн</th>
+        <th mat-header-cell *matHeaderCellDef>Ціна, грн</th>
         <td mat-cell *matCellDef="let row">{{ row.price }}</td>
       </ng-container>
 

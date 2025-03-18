@@ -42,7 +42,7 @@ export class CategoryService {
       .put<Category>(`${this.apiUrl}/category/${request.id}`, request.category)
       .pipe(
         catchError((error: any) => {
-          console.error('Error updating category:', error);
+          console.error('Помилка оновлення категорії:', error);
           throw error;
         })
       );
@@ -51,7 +51,7 @@ export class CategoryService {
   public deleteCategory(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/category/${id}`).pipe(
       catchError((error: any) => {
-        console.error('Error deleting category:', error);
+        console.error('Помилка при видаленні категорії:', error);
         throw error;
       })
     );

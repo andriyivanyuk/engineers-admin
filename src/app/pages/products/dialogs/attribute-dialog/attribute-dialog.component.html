@@ -1,55 +1,47 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title class="m-b-0">Додати атрибут</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="b-t-1">
+<div class="dialog-wrapper">
+  <h3 mat-dialog-title>Додати атрибут</h3>
+  <mat-dialog-content>
     <form [formGroup]="form">
-      <div class="row">
-        <div class="col-12">
-          <mat-label class="f-w-600 m-b-8 d-block">Назва атрибута</mat-label>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input formControlName="key" matInput placeholder="Назва" />
-          </mat-form-field>
-        </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Назва атрибута</mat-label>
+        <input formControlName="key" matInput placeholder="Назва" />
+        @if(form.get('key')?.touched && form.get('key')?.hasError('required')) {
+        <mat-error>Назва не може бути пустою</mat-error>
+        }
+      </mat-form-field>
 
-        <div class="col-12">
-          <mat-label class="f-w-600 m-b-8 d-block">Значення</mat-label>
-          <mat-chip-grid #chipGrid aria-label="Fruit selection">
-            @for (item of attributeValues(); track $index) { @if(item) {
-            <mat-chip-row (removed)="remove(item)">
-              {{ item }}
-              <button matChipRemove [attr.aria-label]="'remove ' + item">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip-row>
-            } }
-          </mat-chip-grid>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input
-              [matChipInputFor]="chipGrid"
-              (matChipInputTokenEnd)="add($event)"
-              matInput
-              placeholder="Введіть значення та натисніть Enter"
-              formControlName="attributeValue"
-            />
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div class="m-t-12 btn-group">
-        <button
-          (click)="save()"
-          mat-flat-button
-          color="primary"
-          class="m-r-8"
-          [disabled]="form.invalid || !filled()"
-        >
-          Додати
-        </button>
-        <button mat-stroked-button color="warn" (click)="close()">
-          Закрити
-        </button>
+      <div>
+        <mat-chip-grid #chipGrid>
+          @for (item of attributeValues(); track $index) { @if(item) {
+          <mat-chip-row (removed)="remove(item)">
+            {{ item }}
+            <button matChipRemove [attr.aria-label]="'remove ' + item">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          } }
+        </mat-chip-grid>
+        <mat-form-field appearance="fill">
+          <mat-label>Значення</mat-label>
+          <input
+            [matChipInputFor]="chipGrid"
+            (matChipInputTokenEnd)="add($event)"
+            matInput
+            placeholder="Введіть значення та натисніть Enter"
+            formControlName="attributeValue"
+          />
+        </mat-form-field>
       </div>
     </form>
-  </mat-card-content>
-</mat-card>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="close()">Закрити</button>
+    <button
+      [disabled]="form.invalid || !filled()"
+      class="primary-button"
+      (click)="save()"
+    >
+      Додати
+    </button>
+  </mat-dialog-actions>
+</div>

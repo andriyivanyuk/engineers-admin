@@ -58,7 +58,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   readonly router = inject(Router);
   readonly dialog = inject(MatDialog);
@@ -131,6 +130,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   public openDeleteDialog(id: number): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '600px',
+      data: {
+        deleteTitle: 'Видалити продукт',
+        deleteContent: 'Ви дійсно хочете видалити цей продукт?',
+      },
     });
 
     const dialogSubscription = dialogRef

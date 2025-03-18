@@ -1,6 +1,14 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  inject,
+  Input,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -13,6 +21,7 @@ import {
   templateUrl: 'delete-dialog.component.html',
   styleUrls: ['./delete-dialog.component.scss'],
   imports: [
+    CommonModule,
     MatButtonModule,
     MatDialogActions,
     MatDialogClose,
@@ -22,7 +31,17 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteDialogComponent {
-  readonly dialogRef = inject(MatDialogRef<DeleteDialogComponent>);
+  @Input() deleteTitle = '';
+  @Input() deleteContent = '';
+
+  constructor(
+    public dialogRef: MatDialogRef<DeleteDialogComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: { deleteTitle: string; deleteContent: string }
+  ) {
+    this.deleteTitle = data.deleteTitle;
+    this.deleteContent = data.deleteContent;
+  }
 
   public delete(): void {
     this.dialogRef.close(true);

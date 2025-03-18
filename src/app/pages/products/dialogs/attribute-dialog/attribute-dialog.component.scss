@@ -5,8 +5,12 @@
   column-gap: 16px;
 }
 
-.mat-mdc-card {
-  margin-bottom: 0;
+mat-dialog-content {
+  margin-top: 1rem;
+}
+
+mat-dialog-actions {
+  column-gap: 25px;
 }
 
 .mat-mdc-chip-set {

@@ -1,0 +1,46 @@
+<div>
+  <app-heading [title]="title"></app-heading>
+  <form class="create-form" [formGroup]="form">
+    <div class="field-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Назва</mat-label>
+        <input
+          matInput
+          placeholder="Введіть назву"
+          type="text"
+          formControlName="title"
+        />
+        @if(form.get('title')?.touched &&
+        form.get('title')?.hasError('required')) {
+        <mat-error>Необхідно вказати назву</mat-error>
+        } @if(form.get('title')?.touched &&
+        form.get('title')?.hasError('maxlength')) {
+        <mat-error>Назва має бути не довшою ніж 255 символів</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Опис</mat-label>
+        <textarea
+          matInput
+          placeholder="Введіть опис"
+          formControlName="description"
+        >
+        </textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="btn-group">
+      <button
+        [disabled]="!form.valid"
+        class="primary-button"
+        (click)="updateCategory()"
+      >
+        Створити
+      </button>
+      <button class="secondary-button" (click)="backToCategories()">
+        До категорій
+      </button>
+    </div>
+  </form>
+</div>

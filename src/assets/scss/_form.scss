@@ -1,7 +1,24 @@
 @use "../scss/variables" as vars;
+@use "@angular/material" as mat;
+
+:root {
+  @include mat.form-field-overrides(
+    (
+      filled-focus-active-indicator-color: vars.$main-color,
+      filled-focus-label-text-color: vars.$main-color,
+
+      outlined-focus-outline-color: vars.$main-color,
+      outlined-focus-label-text-color: vars.$main-color,
+    )
+  );
+}
 
 form {
   color: vars.$main-color !important;
+
+  mat-form-field {
+    width: 100%;
+  }
 
   mat-icon,
   input,
