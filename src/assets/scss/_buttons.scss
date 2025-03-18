@@ -37,9 +37,9 @@
   @include button-styles(
     vars.$main-color,
     vars.$white-color,
-    transparent,
-    vars.$white-color,
     vars.$main-color,
+    vars.$primary-hover,
+    vars.$white-color,
     vars.$main-color
   );
 }
@@ -49,7 +49,7 @@
     vars.$white-color,
     vars.$main-color,
     vars.$main-color,
-    vars.$white-color,
+    vars.$secondary-hover,
     vars.$main-color,
     vars.$main-color
   );

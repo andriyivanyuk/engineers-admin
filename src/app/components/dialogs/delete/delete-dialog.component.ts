@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   Inject,
-  inject,
   Input,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';

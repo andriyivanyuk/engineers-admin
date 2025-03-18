@@ -1,5 +1,7 @@
+@if(isLoaded) {
 <div>
   <app-heading [title]="title"></app-heading>
+
   <form class="create-form" [formGroup]="form">
     <div class="field-group">
       <mat-form-field appearance="fill">
@@ -36,7 +38,7 @@
         class="primary-button"
         (click)="updateCategory()"
       >
-        Створити
+        Змінити
       </button>
       <button class="secondary-button" (click)="backToCategories()">
         До категорій
@@ -44,3 +46,4 @@
     </div>
   </form>
 </div>
+}

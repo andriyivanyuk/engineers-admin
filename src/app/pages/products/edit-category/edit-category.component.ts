@@ -34,6 +34,7 @@ export class EditCategoryComponent implements OnInit {
   title: string = 'Змінити категорію';
 
   form!: FormGroup;
+  isLoaded: boolean = false;
 
   readonly snackBar = inject(MatSnackBar);
   readonly loader = inject(NgxUiLoaderService);
@@ -66,11 +67,15 @@ export class EditCategoryComponent implements OnInit {
 
   public prefillForm(id: number): void {
     if (id) {
+      this.loader.start();
       this.categoryService.getCategoryById(id).subscribe({
         next: (result) => {
+          this.isLoaded = true;
+          this.loader.stop();
           this.form.reset(result);
         },
         error: (error) => {
+          this.loader.stop();
           console.error(error);
         },
       });

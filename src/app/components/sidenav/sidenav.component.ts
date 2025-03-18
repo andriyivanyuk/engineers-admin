@@ -3,7 +3,6 @@ import { Component, inject, input, model, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { trigger, style, animate, transition } from '@angular/animations';
-import { MatDialog } from '@angular/material/dialog';
 import { MaterialModule } from '../../material.module';
 import { TokenStorageService } from '../../services/token-storage.service';
 import { MenuItem } from './menuItem';
@@ -46,10 +45,6 @@ export class SidenavComponent implements OnInit {
     this.tokenStorage.clearToken();
     this.router.navigate(['/authentication/login']);
   }
-
-  readonly animal = signal('');
-  readonly name = model('');
-  readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.mapMenuItems();

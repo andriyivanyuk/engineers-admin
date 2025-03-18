@@ -1,12 +1,12 @@
 <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed() }">
   <div class="sidebar-header">
-    @if(isSidebarCollapsed()) {
-    <a routerLink="/admin/dashboard">D</a>
-    } @else {
     <div routerLink="/admin/dashboard" class="logo-img">
-      <img src="assets/images/logo.png" />
+      <img
+        [src]="
+          isSidebarCollapsed()
+            ? 'assets/images/mobile-logo.png'
+            : 'assets/images/logo.png'"/>
     </div>
-    }
   </div>
   <div class="sidebar-menu">
     <ul class="items-list">
