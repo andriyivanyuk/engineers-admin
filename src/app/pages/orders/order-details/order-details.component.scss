@@ -26,9 +26,18 @@
   }
 }
 
-table tr {
-  cursor: pointer;
-  color: vars.$main-color;
+table {
+  tr {
+    cursor: pointer;
+    color: vars.$main-color;
+  }
+
+  .cost {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 2px;
+  }
 }
 
 .empty-img-error {

@@ -63,7 +63,13 @@
 
         <ng-container matColumnDef="price">
           <th mat-header-cell *matHeaderCellDef>Вартість, грн</th>
-          <td mat-cell *matCellDef="let row">{{ row.total_cost }}</td>
+          <td mat-cell *matCellDef="let row">
+            <div class="cost">
+              <span>{{ row.quantity }}</span>
+              <span>x</span>
+              <span>{{ row.price }}</span>
+            </div>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="image">

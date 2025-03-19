@@ -1,4 +1,11 @@
 @use "../scss/variables" as vars;
+@use "@angular/material" as mat;
+
+@include mat.paginator-overrides(
+  (
+    container-background-color: vars.$white-color,
+  )
+);
 
 h1,
 h2,

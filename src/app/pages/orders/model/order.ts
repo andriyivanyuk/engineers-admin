@@ -19,6 +19,7 @@ export interface OrderItem {
 
 export interface TableOrder {
   title: string;
-  total_cost: number;
+  price: number;
   image_path?: string;
+  quantity: number;
 }

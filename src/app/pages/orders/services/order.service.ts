@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { Order } from '../model/order';
 import { ViewOrder } from '../model/viewOrder';
 import { UpdateOrderStatus } from '../model/updateOrderRequest';
+import { OrderStatus } from '../model/orderStatus';
 
 @Injectable()
 export class OrderService {
@@ -40,7 +41,7 @@ export class OrderService {
 
   private loadOrderStatuses() {
     this.http
-      .get<any[]>(this.apiUrl + '/orderStatuses')
+      .get<OrderStatus[]>(this.apiUrl + '/orderStatuses')
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (statuses) => this.orderStatuses.next(statuses),

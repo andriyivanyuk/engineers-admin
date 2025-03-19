@@ -104,8 +104,9 @@ export class OrderDetailsComponent implements OnInit {
         const fullPath = `http://localhost:5500/${item.image_path}`;
         return {
           title: item.title,
-          total_cost: item.price,
+          price: item.price,
           image_path: fullPath,
+          quantity: item.quantity,
         };
       });
 
