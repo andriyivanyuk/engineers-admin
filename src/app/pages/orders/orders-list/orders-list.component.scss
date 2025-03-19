@@ -8,6 +8,7 @@ form {
 }
 
 table {
+  table-layout: fixed;
   tr {
     cursor: pointer;
     color: vars.$main-color;

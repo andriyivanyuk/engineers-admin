@@ -57,4 +57,16 @@ export const menuItems: MenuItem[] = [
       },
     ],
   },
+  {
+    icon: 'business_center',
+    label: 'Замовлення',
+    isOpen: false,
+    children: [
+      {
+        icon: 'format_list_bulleted',
+        label: 'Список замовлень',
+        route: 'order-list',
+      },
+    ],
+  },
 ];

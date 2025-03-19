@@ -12,3 +12,8 @@ mat-dialog-content {
 mat-dialog-actions span {
   color: vars.$main-color !important;
 }
+
+table {
+  background-color: vars.$white-color !important;
+  color: vars.$main-color !important;
+}

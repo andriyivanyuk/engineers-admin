@@ -1,0 +1,52 @@
+@use "../../../../assets/scss/variables" as vars;
+
+.img-wrapper {
+  margin-bottom: 20px;
+}
+
+.main-form {
+  max-width: 800px;
+}
+
+.ordered-items {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+
+.image-path {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  padding: 10px 0;
+
+  img {
+    border-radius: 8px;
+  }
+}
+
+table tr {
+  cursor: pointer;
+  color: vars.$main-color;
+}
+
+.empty-img-error {
+  color: #d32f2f;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+.handle-order-title {
+  margin-bottom: 1rem;
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 16px;
+  margin-top: 25px;
+}

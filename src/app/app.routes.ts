@@ -16,6 +16,8 @@ import { EditProductComponent } from './pages/products/edit-product/edit-product
 import { CreateCategoryComponent } from './pages/products/create-category/create-category.component';
 import { CategoryListComponent } from './pages/products/category-list/category-list.component';
 import { EditCategoryComponent } from './pages/products/edit-category/edit-category.component';
+import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
+import { OrderDetailsComponent } from './pages/orders/order-details/order-details.component';
 
 export const routes: Routes = [
   {
@@ -54,10 +56,19 @@ export const routes: Routes = [
         path: 'edit-category/:id',
         component: EditCategoryComponent,
       },
+      {
+        path: 'order-details/:orderId',
+        component: OrderDetailsComponent,
+      },
 
       { path: 'product-list', component: ProductListComponent },
       { path: 'create-code', component: CreateCodeComponent },
       { path: 'code-list', component: CodeListComponent },
+
+      {
+        path: 'order-list',
+        component: OrdersListComponent,
+      },
     ],
   },
   {
