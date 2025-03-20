@@ -7,6 +7,8 @@ export interface Order {
   customer_name: string;
   items: OrderItem[];
   total_cost: string;
+  city: string;
+  departmentNumber: string;
 }
 
 export interface OrderItem {

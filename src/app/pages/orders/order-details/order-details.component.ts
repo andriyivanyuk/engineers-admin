@@ -40,7 +40,7 @@ export class OrderDetailsComponent implements OnInit {
   title: string = 'Деталі замовлення';
 
   dataSource = new MatTableDataSource<TableOrder>();
-  displayedColumns: string[] = ['title', 'price', 'image'];
+  displayedColumns: string[] = ['title', 'total', 'image'];
 
   statusControl = new FormControl<number>(0, [Validators.required]);
   form!: FormGroup;
@@ -80,6 +80,8 @@ export class OrderDetailsComponent implements OnInit {
       email: [''],
       phone: [''],
       totalCost: [''],
+      city: [''],
+      departmentNumber: [''],
       orderedItems: this.fb.array([]),
     });
   }
@@ -93,6 +95,9 @@ export class OrderDetailsComponent implements OnInit {
     this.form.controls['firstName'].reset(order.customer_name);
     this.form.controls['email'].reset(order.email);
     this.form.controls['phone'].reset(order.phone);
+    this.form.controls['phone'].reset(order.phone);
+    this.form.controls['city'].reset(order.city);
+    this.form.controls['departmentNumber'].reset(order.departmentNumber);
     this.form.controls['totalCost'].reset(order.total_cost);
 
     if (!!order.items.length) {
