@@ -69,4 +69,16 @@ export const menuItems: MenuItem[] = [
       },
     ],
   },
+  {
+    icon: 'settings',
+    label: 'Налаштування',
+    isOpen: false,
+    children: [
+      {
+        icon: 'store',
+        label: 'Магазин',
+        route: 'setting',
+      },
+    ],
+  },
 ];

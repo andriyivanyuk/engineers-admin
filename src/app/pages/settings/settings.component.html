@@ -1,0 +1,19 @@
+<div>
+  <app-heading [title]="title" [refreshIcon]="true"></app-heading>
+  <form [formGroup]="form" class="main-form">
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>API код для магазину</mat-label>
+        <input formControlName="title" matInput />
+        <button
+          matTooltip="Копіювати код"
+          mat-icon-button
+          matSuffix
+          (click)="copyCode()"
+        >
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </form>
+</div>

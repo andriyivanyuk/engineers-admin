@@ -28,7 +28,7 @@ import { menuItems } from './navData';
 })
 export class SidenavComponent implements OnInit {
   isSidebarCollapsed = input<boolean>(false);
-  menuItems: MenuItem[] = [];
+  menuItems: MenuItem[] = menuItems;
 
   readonly router = inject(Router);
   readonly tokenStorage = inject(TokenStorageService);
@@ -47,7 +47,7 @@ export class SidenavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mapMenuItems();
+    // this.mapMenuItems();
   }
 
   public mapMenuItems(): void {

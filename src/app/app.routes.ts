@@ -18,6 +18,7 @@ import { CategoryListComponent } from './pages/products/category-list/category-l
 import { EditCategoryComponent } from './pages/products/edit-category/edit-category.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrderDetailsComponent } from './pages/orders/order-details/order-details.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,7 @@ export const routes: Routes = [
       { path: 'product-list', component: ProductListComponent },
       { path: 'create-code', component: CreateCodeComponent },
       { path: 'code-list', component: CodeListComponent },
+      { path: 'setting', component: SettingsComponent },
 
       {
         path: 'order-list',
