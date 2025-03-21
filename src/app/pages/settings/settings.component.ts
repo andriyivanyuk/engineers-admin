@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.getCodeList();
+    this.getApiCode();
   }
 
   public createForm() {
@@ -39,7 +39,7 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  public getCodeList(): void {
+  public getApiCode(): void {
     this.loader.start();
     this.settingService.getStoreId().subscribe({
       next: (result) => {
@@ -74,7 +74,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  public handleRefresh() {
-    this.getCodeList();
+  public handleRefresh(): void {
+    this.getApiCode();
   }
 }

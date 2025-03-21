@@ -63,7 +63,7 @@ export const menuItems: MenuItem[] = [
     isOpen: false,
     children: [
       {
-        icon: 'format_list_bulleted',
+        icon: 'receipt_long',
         label: 'Список замовлень',
         route: 'order-list',
       },

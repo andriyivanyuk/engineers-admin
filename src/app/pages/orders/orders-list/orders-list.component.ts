@@ -33,7 +33,6 @@ export class OrdersListComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [
     'customerName',
-    'email',
     'phone',
     'status',
     'totalCost',

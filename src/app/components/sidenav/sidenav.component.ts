@@ -1,5 +1,5 @@
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { Component, inject, input, model, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -28,7 +28,7 @@ import { menuItems } from './navData';
 })
 export class SidenavComponent implements OnInit {
   isSidebarCollapsed = input<boolean>(false);
-  menuItems: MenuItem[] = menuItems;
+  menuItems: MenuItem[] = [];
 
   readonly router = inject(Router);
   readonly tokenStorage = inject(TokenStorageService);
@@ -47,7 +47,7 @@ export class SidenavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.mapMenuItems();
+    this.mapMenuItems();
   }
 
   public mapMenuItems(): void {
