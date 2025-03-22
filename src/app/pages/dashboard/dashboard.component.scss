@@ -1,0 +1,39 @@
+@use "@angular/material" as mat;
+@use "../../../assets//scss/variables" as vars;
+
+.analytics-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+  .title {
+    color: vars.$main-color;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .analytics-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+  }
+
+  .analytics-card {
+    flex: 1 1 calc(20% - 16px);
+    min-width: 150px;
+    color: vars.$main-color;
+
+    mat-card-title {
+      font-size: 13px;
+    }
+  }
+
+  .loading-progress {
+    margin-top: 1rem;
+    @include mat.progress-bar-overrides(
+      (
+        active-indicator-color: vars.$main-color,
+      )
+    );
+  }
+}

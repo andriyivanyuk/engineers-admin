@@ -19,8 +19,8 @@ export const menuItems: MenuItem[] = [
     ],
   },
   {
-    icon: 'dashboard',
-    label: 'Головна',
+    icon: 'analytics',
+    label: 'Аналітика',
     route: 'dashboard',
   },
   {

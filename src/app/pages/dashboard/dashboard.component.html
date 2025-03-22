@@ -1,0 +1,97 @@
+<app-heading [title]="title"></app-heading>
+
+@if(!loading && orderAnalytics || !loading && incomeAnalytics) {
+<div class="analytics-wrapper">
+  <div class="title">Замовлення</div>
+  <div class="analytics-container">
+    <mat-card class="analytics-card">
+      <mat-card-header>
+        <mat-card-title>Загальна кількість</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>{{ orderAnalytics?.total }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="analytics-card">
+      <mat-card-header>
+        <mat-card-title>Сьогодні</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>{{ orderAnalytics?.today }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="analytics-card">
+      <mat-card-header>
+        <mat-card-title>Цього тижня</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>{{ orderAnalytics?.week }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="analytics-card">
+      <mat-card-header>
+        <mat-card-title>Цього місяця</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>{{ orderAnalytics?.month }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="analytics-card">
+      <mat-card-header>
+        <mat-card-title>За поточний рік</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>{{ orderAnalytics?.year }}</h2>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="title">Дохід</div>
+  <div class="analytics-container">
+    <mat-card class="analytics-card">
+      <mat-card-header>
+        <mat-card-title>Загальний дохід</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>{{ incomeAnalytics?.total_revenue | currency }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="analytics-card">
+      <mat-card-header>
+        <mat-card-title>Дохід сьогодні</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>{{ incomeAnalytics?.today_revenue | currency }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="analytics-card">
+      <mat-card-header>
+        <mat-card-title>Дохід цього місяця</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>{{ incomeAnalytics?.month_revenue | currency }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="analytics-card">
+      <mat-card-header>
+        <mat-card-title>Дохід цього року</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>{{ incomeAnalytics?.year_revenue | currency }}</h2>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+} @else {
+<mat-progress-bar
+  mode="indeterminate"
+  class="loading-progress"
+></mat-progress-bar
+>}
