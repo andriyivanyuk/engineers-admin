@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CreateProductResponse } from '../models/createProductResponse';
@@ -9,8 +9,11 @@ import { DetailsProductResponse } from '../models/updatedProductResponse';
 @Injectable()
 export class ProductService {
   private apiUrl = 'http://localhost:5500/api/admin';
+  private r2PublicDomain =
+    'https://pub-f2a1168bcc8267043d925c14d7a08960.r2.dev';
+  private workerDomain = 'https://r2-proxy-worker.andriyivvanyuk.workers.dev';
 
-  constructor(private http: HttpClient) {}
+  readonly http = inject(HttpClient);
 
   public getProducts(
     page: number,
@@ -34,7 +37,10 @@ export class ProductService {
     return products.map((item: ViewProduct) => {
       return {
         ...item,
-        image_path: `http://localhost:5500/${item.image_path}`,
+        image_path: item.image_path?.replace(
+          this.r2PublicDomain,
+          this.workerDomain
+        ),
       };
     });
   }

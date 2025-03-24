@@ -27,13 +27,13 @@
       font-size: 13px;
     }
   }
+}
 
-  .loading-progress {
-    margin-top: 1rem;
-    @include mat.progress-bar-overrides(
-      (
-        active-indicator-color: vars.$main-color,
-      )
-    );
-  }
+.loading-progress {
+  margin-top: 1rem;
+  @include mat.progress-bar-overrides(
+    (
+      active-indicator-color: vars.$main-color,
+    )
+  );
 }
