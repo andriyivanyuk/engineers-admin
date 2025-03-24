@@ -261,11 +261,10 @@ export class EditProductComponent implements OnInit {
     const imagesFormArray = this.images as FormArray;
     if (images?.length) {
       images.forEach((image) => {
-        const fullPath = `http://localhost:5500/${image.image_path}`;
         imagesFormArray.push(
           this.fb.group({
             file: [image.file],
-            path: [fullPath],
+            path: [image.image_path],
             isPrimary: [image.isPrimary],
             imageId: [image.image_id],
           })
@@ -326,6 +325,13 @@ export class EditProductComponent implements OnInit {
     if (id) {
       this.productService.getProductById(id).subscribe({
         next: (result) => {
+          const data = result.product.images.map((item) => {
+            return {
+              ...item,
+              image_path: this.productService.replaceDomain(item.image_path),
+            };
+          });
+          result.product.images = data;
           this.prefillForm(result);
           this.loader.stop();
         },

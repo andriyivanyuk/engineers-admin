@@ -37,12 +37,13 @@ export class ProductService {
     return products.map((item: ViewProduct) => {
       return {
         ...item,
-        image_path: item.image_path?.replace(
-          this.r2PublicDomain,
-          this.workerDomain
-        ),
+        image_path: this.replaceDomain(item.image_path ? item.image_path : ''),
       };
     });
+  }
+
+  public replaceDomain(imagePath: string): string {
+    return imagePath.replace(this.r2PublicDomain, this.workerDomain);
   }
 
   public getProductById(productId: number): Observable<DetailsProductResponse> {
