@@ -298,7 +298,13 @@ export class EditProductComponent implements OnInit {
       this.setAttributes(result.product.attributes);
     }
     if (!!result.product.images?.length) {
-      this.setImages(result.product?.images);
+      const images = result.product.images.map((item) => {
+        return {
+          ...item,
+          image_path: this.productService.replaceDomain(item.image_path),
+        };
+      });
+      this.setImages(images);
 
       let primaryIndex: number;
 
@@ -325,13 +331,6 @@ export class EditProductComponent implements OnInit {
     if (id) {
       this.productService.getProductById(id).subscribe({
         next: (result) => {
-          const data = result.product.images.map((item) => {
-            return {
-              ...item,
-              image_path: this.productService.replaceDomain(item.image_path),
-            };
-          });
-          result.product.images = data;
           this.prefillForm(result);
           this.loader.stop();
         },
