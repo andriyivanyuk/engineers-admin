@@ -48,6 +48,20 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
+        <mat-label>Тип продукту</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Введіть тип"
+          formControlName="product_type"
+        />
+        @if(form.get('product_type')?.touched &&
+        form.get('product_type')?.hasError('product_type')) {
+        <mat-error>Необхідно вказати тип</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
         <mat-label>Статус</mat-label>
         <mat-select formControlName="status_id">
           @for (status of (statuses$ | async); track status.status_id) {
@@ -167,7 +181,6 @@
           <img
             [src]="image.get('path')!.value"
             [class.selected-image]="index === form.get('primary')!.value"
-            style="width: 100px; height: auto"
             (click)="setPrimaryImage(index, image)"
           />
 

@@ -75,6 +75,7 @@ export class CreateProductComponent implements OnInit {
       description: [''],
       price: [null, [Validators.required]],
       stock: [null, [Validators.required]],
+      product_type: [null, [Validators.required]],
       category_id: [null, [Validators.required]],
       status_id: [null, [Validators.required]],
       attributes: this.fb.array([]),
@@ -256,6 +257,7 @@ export class CreateProductComponent implements OnInit {
     formData.append('description', this.form.get('description')?.value);
     formData.append('price', this.form.get('price')?.value);
     formData.append('stock', this.form.get('stock')?.value);
+    formData.append('product_type', this.form.get('product_type')?.value);
     formData.append('category_id', this.form.get('category_id')?.value);
     formData.append('status_id', this.form.get('status_id')?.value);
 

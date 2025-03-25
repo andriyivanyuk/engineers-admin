@@ -84,6 +84,7 @@ export class EditProductComponent implements OnInit {
       description: [''],
       price: [null, [Validators.required]],
       stock: [null, [Validators.required]],
+      product_type: [null, [Validators.required]],
       category_id: [null, [Validators.required]],
       status_id: [null, [Validators.required]],
       attributes: this.fb.array([]),
@@ -289,6 +290,8 @@ export class EditProductComponent implements OnInit {
     this.form.controls['title'].reset(result.product.title);
     this.form.controls['price'].reset(result.product.price);
     this.form.controls['stock'].reset(result.product.stock);
+    this.form.controls['product_type'].reset(result.product.product_type);
+    this.form.controls['description'].reset(result.product.description);
     this.form.controls['status_id'].reset(result.product.status_id);
     this.form.controls['category_id'].reset(result.product.category_id);
     this.form.controls['product_id'].reset(result.product.product_id);
@@ -352,6 +355,7 @@ export class EditProductComponent implements OnInit {
     formData.append('description', this.form.get('description')?.value);
     formData.append('price', this.form.get('price')?.value);
     formData.append('stock', this.form.get('stock')?.value);
+    formData.append('product_type', this.form.get('product_type')?.value);
     formData.append('category_id', this.form.get('category_id')?.value);
     formData.append('status_id', this.form.get('status_id')?.value);
     formData.append('deleteImageIds', JSON.stringify(this.imageIds));

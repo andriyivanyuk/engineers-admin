@@ -3,7 +3,6 @@ import { HeadingComponent } from '../../../components/heading/heading.component'
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MaterialModule } from '../../../material.module';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 import { ProductService } from '../services/products.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
