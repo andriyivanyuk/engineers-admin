@@ -62,7 +62,6 @@ export class EditProductComponent implements OnInit {
   readonly route = inject(ActivatedRoute);
   readonly router = inject(Router);
 
-  selectedImageId: number = 0;
   imageIds: number[] = [];
 
   selectedImageName: BehaviorSubject<string> = new BehaviorSubject<string>(
@@ -115,8 +114,7 @@ export class EditProductComponent implements OnInit {
       control.patchValue({ isPrimary: i === index });
     });
 
-    if (image) {
-      this.selectedImageId = image.value.imageId;
+    if (!!image.value.imageId) {
       this.updateSelectedImageName(index);
     }
   }
@@ -358,8 +356,6 @@ export class EditProductComponent implements OnInit {
     formData.append('status_id', this.form.get('status_id')?.value);
     formData.append('deleteImageIds', JSON.stringify(this.imageIds));
 
-    formData.append('selectedImageId', JSON.stringify(this.selectedImageId));
-
     const attributes = this.mapValuesAttributes(this.attributes.value);
     if (!!attributes?.length) {
       formData.append('attributes', JSON.stringify(attributes));
@@ -370,6 +366,9 @@ export class EditProductComponent implements OnInit {
       const file = imageControl.get('file')!.value;
       if (file) {
         formData.append('images', file, file.name);
+      }
+      if (index.toString() === this.form.get('primary')!.value.toString()) {
+        formData.append('primaryIndex', index.toString());
       }
     });
 
@@ -389,7 +388,6 @@ export class EditProductComponent implements OnInit {
         next: (result) => {
           this.loader.stop();
           this.imageIds = [];
-          this.selectedImageId = 0;
 
           this.prefillForm(result);
           this.snackBar.open('Продукт оновлено', 'Закрити', {
